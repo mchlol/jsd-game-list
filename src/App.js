@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import axios from 'axios';
-
 function App() {
 
   const [games, setGames] = useState();
@@ -18,6 +16,7 @@ function App() {
           setGames(gameList);
           console.log('games',games);
           console.log('Type of games',typeof games)
+          console.log(games.response);
 
       } catch (err) {
         console.log('error:',err);
@@ -32,7 +31,7 @@ function App() {
   return (
     <div className="App">
       <p>Check console 🧑‍💻</p>
-      <p> {loading ? "Loading..." : '' } </p>
+      <p> {loading ? "Loading..." : games.response.map(game => <p>{game.name}</p>) } </p>
     </div>
   );
 }
