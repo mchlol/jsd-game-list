@@ -1,40 +1,38 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import './App.css';
-// import axios from 'axios';
+import { Route, Routes, HashRouter as Router, Link } from 'react-router-dom';
+import SearchResults from './SearchResults';
+import SearchForm from './SearchForm';
 
 
 function App() {
 
-  const [games, setGames] = useState();
-  const [loading, setLoading] = useState(false);
-
-  useEffect( () => {
-    async function fetchGames() {
-      const dataSource = `https://rawg.io/api/games?token&key=${process.env.REACT_APP_API_KEY}`;
-      try {
-        setLoading(true);
-
-        const gameList = await fetch(dataSource)
-          .then( (res) => res.json());
-          setGames(gameList);
-          console.log('games',games);
-          console.log('Type of games',typeof games)
-          console.log(games.response);
-          console.log('gameList:',gameList);
-
-      } catch (err) {
-        console.log('error:', err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchGames();
-  }, []);
+  
 
   return (
-    <div className="App">
-      <p>Check console 🧑‍💻</p>
-      <p> {loading ? "Loading..." : 'Content loaded' } </p>
+    // <div className="App">
+    //   <p>Check console 🧑‍💻</p>
+    //   <p> {loading ? "Loading..." : 'Content loaded' } </p>
+    // </div>
+
+    <div className="App-header">
+      <Router>
+        <header>
+          <h1>Game List</h1>
+        </header>
+
+        <nav>
+          <Link to="/"><button>Home</button></Link>
+        </nav>
+
+        <Routes>
+
+          <Route path="/" element={<SearchForm />} />
+
+          <Route path="/search/:query" element={<SearchResults />} />
+
+        </Routes>
+      </Router>
     </div>
   );
 }
