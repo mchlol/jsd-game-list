@@ -32,9 +32,15 @@ function App() {
           <Route path="/search/:query" element={<SearchResults />} />
 
         </Routes>
+
+        <footer>
+          <small>Data graciously provided by <a href="https://rawg.io/" target="_blank">RAWG.io</a></small>
+        </footer>
       </Router>
     </div>
+    
   );
+
 }
 
 export default App;

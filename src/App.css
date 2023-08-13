@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
   text-align: center;
 }
@@ -5,6 +9,28 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+#searchResults {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.game-card {
+  flex-basis: 0 0 400px;
+  border: 1px solid red;
+}
+
+.spanFormat {
+  display: block;
+  font-size: 0.9rem;
+}
+
+.gameImg {
+  width: 100px;
+  height: auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -32,6 +58,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
