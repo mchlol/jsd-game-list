@@ -1,9 +1,9 @@
 // import { useEffect, useState } from 'react';
 import './App.css';
 import { Route, Routes, HashRouter as Router, Link } from 'react-router-dom';
-import SearchResults from './SearchResults';
-import SearchForm from './SearchForm';
-
+import SearchResults from './components/SearchResults';
+import SearchForm from './components/SearchForm';
+import { Button, Navbar, Footer } from 'react-daisyui';
 
 function App() {
 
@@ -21,11 +21,19 @@ function App() {
           <h1>Game List</h1>
         </header>
 
-        <nav>
-          <Link to="/"><button>Home</button></Link>
-        </nav>
+        
 
-        <Routes>
+          <Navbar>
+            <div className="flex-1">
+              <Link to="/">
+              <Button className="text-xl" color="primary"> Home </Button>
+              </Link>
+            </div>
+
+            
+          </Navbar>
+
+          <Routes>
 
           <Route path="/" element={<SearchForm />} />
 
@@ -33,9 +41,9 @@ function App() {
 
         </Routes>
 
-        <footer>
+        <Footer>
           <small>Data graciously provided by <a href="https://rawg.io/" target="_blank">RAWG.io</a></small>
-        </footer>
+        </Footer>
       </Router>
     </div>
     

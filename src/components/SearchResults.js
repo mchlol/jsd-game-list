@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { Loading, Card, Button } from "react-daisyui";
 
-const API_KEY = process.env.REACT_APP_API_KEY;
+
+// const API_KEY = process.env.REACT_APP_API_KEY;
 
 function SearchResults() {
 
@@ -66,21 +68,30 @@ function SearchResults() {
     }
 
     return (
-        <div id="searchResults">
+        <div className="searchResults">
             {
                 loading
                 ?
-                <p>Loading results...</p>
+                <Loading />
                 :
+                
                 games.map( game =>
-                <div 
+                <Card 
+                className="max-w-md game-card"
                 onClick={ () => navigate(`${game.slug}`)} 
                 key={game.slug} 
-                className="game-card">
-
-                    <p>{game.slug}</p>
-
-                </div> 
+                >
+                    <Card.Image className="gameImg" src={game.background_image} alt={game.name} />
+                    
+                    <Card.Body>
+                        <Card.Title tag="h2">{game.name}
+                    </Card.Title>
+                        <p>Released {game.released}</p>
+                        <Card.Actions className="justify-end">
+                            <Button className="btn btn-primary">View</Button>
+                        </Card.Actions>
+                    </Card.Body>
+                </Card> 
                 )
             }
         </div>

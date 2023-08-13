@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Form, Button, Input } from "react-daisyui";
 
 function SearchForm() {
 
@@ -13,10 +14,10 @@ function SearchForm() {
     }
 
     return (
-        <form id="searchForm" onSubmit={handleSubmit}>
-            <input type="text" onChange={ev => setQuery(ev.target.value)} />
-            <button>Search</button>
-        </form>
+        <Form className="join" id="searchForm" onSubmit={handleSubmit}>
+            <Input bordered type="text" placeholder="Search games" className="" onChange={ev => setQuery(ev.target.value)} />
+            <Button className="w-24">Search</Button>
+        </Form>
     );
 }
 

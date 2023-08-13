@@ -19,7 +19,7 @@
 }
 
 .game-card {
-  flex-basis: 0 0 400px;
+  max-width: 400px;
   border: 1px solid red;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .gameImg {
-  width: 100px;
+  width: 100%;
   height: auto;
 }
 
@@ -39,7 +39,7 @@
   }
 }
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -48,11 +48,11 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-.App-link {
+/* .App-link {
   color: #61dafb;
-}
+} */
 
 @keyframes App-logo-spin {
   from {
