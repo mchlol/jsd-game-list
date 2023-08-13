@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import axios from 'axios';
 
 function App() {
+
+  const [games, setGames] = useState();
+  const [loading, setLoading] = useState(false);
+
+  useEffect( () => {
+    async function fetchGames() {
+      const dataSource = `/.netlify/functions/gamelist`;
+      try {
+        setLoading(true);
+
+        const gameList = await fetch(dataSource)
+          .then( (res) => res.json());
+          setGames(gameList);
+          console.log('games',games);
+          console.log('Type of games',typeof games)
+
+      } catch (err) {
+        console.log('error:',err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchGames();
+  }, []);
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>Check console 🧑‍💻</p>
+      <p> {loading ? "Loading..." : '' } </p>
     </div>
   );
 }
