@@ -89,6 +89,7 @@ function SearchResults() {
     }
 
     return (
+        <>
         <div id="searchResults">
             {
                 loading
@@ -115,7 +116,10 @@ function SearchResults() {
                 </Card> 
                 )
             }
+            
         </div>
+        <Button>Next Page →</Button>
+        </>
     )
 }
 
