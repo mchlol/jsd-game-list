@@ -13,13 +13,26 @@
 
 #searchResults {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 5px;
+  flex-flow: row wrap;
+  gap: 10px;
+  place-items: center;
 }
 
+/* @media screen and (max-width: 820px) {
+  #searchResults {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #searchResults {
+    display: flex;
+    flex-direction: column;
+  }
+} */
+
 .game-card {
-  max-width: 400px;
+  flex: 0 1 200px;
   border: 1px solid red;
 }
 
@@ -28,9 +41,10 @@
   font-size: 0.9rem;
 }
 
-.gameImg {
-  width: 100%;
-  height: auto;
+.game-card img {
+  max-width: 200px;
+  max-height: 200px;
+  object-fit: cover;
 }
 
 @media (prefers-reduced-motion: no-preference) {

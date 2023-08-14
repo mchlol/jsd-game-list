@@ -3,8 +3,55 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { Loading, Card, Button } from "react-daisyui";
 
+const formatDate = function(date) {
+    // date is always formatted YYYY-MM-DD
+    const year = date.slice(0,4);
+    let month = date.slice(5,7);
+    const day = date.slice(8,10)
 
-// const API_KEY = process.env.REACT_APP_API_KEY;
+    switch(month) {
+        case '01':
+            month = 'January';
+            break;
+        case '02':
+            month = 'February';
+            break;
+        case '03':
+            month = "March";
+            break;
+        case '04':
+            month = 'April';
+            break;
+        case '05':
+            month = 'May';
+            break;
+        case '06':
+            month = 'June';
+            break;
+        case '07':
+            month = 'July';
+            break;
+        case '08':
+            month = 'August';
+            break;
+        case '09':
+            month = 'September';
+            break;
+        case '10':
+            month = 'October';
+            break;
+        case '11':
+            month = 'November';
+            break;
+        case '12':
+            month = 'December';
+            break;
+        default:
+            console.log('Could not determine month');
+    }
+    let dateString = `${day} ${month} ${year}`;
+    return dateString;
+}; // formatDate
 
 function SearchResults() {
 
@@ -68,7 +115,7 @@ function SearchResults() {
     }
 
     return (
-        <div className="searchResults">
+        <div id="searchResults">
             {
                 loading
                 ?
@@ -86,9 +133,9 @@ function SearchResults() {
                     <Card.Body>
                         <Card.Title tag="h2">{game.name}
                     </Card.Title>
-                        <p>Released {game.released}</p>
+                        <span className="spanFormat">Released ({formatDate(game.released)})</span>
                         <Card.Actions className="justify-end">
-                            <Button className="btn btn-primary">View</Button>
+                            <Button className="btn btn-sm btn-primary">View</Button>
                         </Card.Actions>
                     </Card.Body>
                 </Card> 
