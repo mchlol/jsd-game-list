@@ -55,32 +55,6 @@ const formatDate = function(date) {
 
 function SearchResults() {
 
-//     const [games, setGames] = useState();
-//   const [loading, setLoading] = useState(false);
-
-//   useEffect( () => {
-//     async function fetchGames() {
-//       const dataSource = `https://rawg.io/api/games?token&key=${process.env.REACT_APP_API_KEY}`;
-//       try {
-//         setLoading(true);
-
-//         const gameList = await fetch(dataSource)
-//           .then( (res) => res.json());
-//           setGames(gameList);
-//           console.log('games',games);
-//           console.log('Type of games',typeof games)
-//           console.log(games.response);
-//           console.log('gameList:',gameList);
-
-//       } catch (err) {
-//         console.log('error:', err);
-//       } finally {
-//         setLoading(false);
-//       }
-//     }
-//     fetchGames();
-//   }, []);
-
     const params = useParams();
 
     const navigate = useNavigate();
@@ -92,7 +66,7 @@ function SearchResults() {
     useEffect( () => {
         console.log('useEffect callback running');
         loadSearchResults(params.query);
-    }, [params.query]);
+    }, []);
     
     function loadSearchResults (query) {
         setLoading(true);
@@ -125,7 +99,7 @@ function SearchResults() {
                 games.map( game =>
                 <Card 
                 className="max-w-md game-card"
-                onClick={ () => navigate(`${game.slug}`)} 
+                onClick={ () => navigate(`/${game.slug}`)} 
                 key={game.slug} 
                 >
                     <Card.Image className="gameImg" src={game.background_image} alt={game.name} />

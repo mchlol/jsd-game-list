@@ -3,6 +3,7 @@ import './App.css';
 import { Route, Routes, HashRouter as Router, Link } from 'react-router-dom';
 import SearchResults from './components/SearchResults';
 import SearchForm from './components/SearchForm';
+import ViewGame from './components/ViewGame';
 import { Button, Navbar, Footer } from 'react-daisyui';
 
 function App() {
@@ -10,40 +11,48 @@ function App() {
   
 
   return (
-    // <div className="App">
-    //   <p>Check console 🧑‍💻</p>
-    //   <p> {loading ? "Loading..." : 'Content loaded' } </p>
-    // </div>
 
     <div className="App-header">
       <Router>
-        <header>
-          <h1>Game List</h1>
-        </header>
-
-        
 
           <Navbar>
             <div className="flex-1">
               <Link to="/">
-              <Button className="text-xl" color="primary"> Home </Button>
+                <Button tag="a" className="text-xl normal-case" color="ghost">
+                  GameList
+                </Button>
               </Link>
             </div>
 
-            
+            <div className="flex-1">
+              <Link to="/my-lists">
+                <Button tag="a" shape="square" color="ghost">
+                  My Lists
+                </Button>
+              </Link>
+            </div>
+
           </Navbar>
 
-          <Routes>
 
+        <Routes>
           <Route path="/" element={<SearchForm />} />
+
+          {/* <Route path="/my-lists" element={<MyLists /> } /> */}
 
           <Route path="/search/:query" element={<SearchResults />} />
 
+          <Route path="/:slug" element={<ViewGame />} />
         </Routes>
 
-        <Footer>
-          <small>Data graciously provided by <a href="https://rawg.io/" target="_blank">RAWG.io</a></small>
+        <Footer className="p-4 bg-primary text-secondary-content">
+          <div>
+            <p>
+              Data provided by <a className="link link-hover" href="https://rawg.io/" target="_blank">RAWG.io</a>
+            </p>
+          </div>
         </Footer>
+
       </Router>
     </div>
     
