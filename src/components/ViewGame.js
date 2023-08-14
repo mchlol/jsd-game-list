@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Loading } from "react-daisyui";
+import { Loading, Card } from "react-daisyui";
 
 function ViewGame () {
 
@@ -19,7 +19,12 @@ function ViewGame () {
     function loadGameDetails(slug) {
         setLoading(true);
 
-        axios.get(`https://rawg.io/api/games/${slug}&token&key=${process.env.REACT_APP_API_KEY}`)
+        const callApi = `https://rawg.io/api/games/${slug}&token&key=${process.env.REACT_APP_API_KEY}`;
+
+        const url = 'https://corsproxy.io/?' + encodeURIComponent(callApi);
+        
+
+        axios.get('https://corsproxy.io/?https%3A%2F%2Frawg.io%2Fapi%2Fgames%2Fskate%3Fkey%3Da2fbc003e2d445e19986345bc468db3c')
         .then (res => {
             console.log('Response:',res);
             setGame(res.data);
@@ -43,7 +48,9 @@ function ViewGame () {
             ?
             <Loading />
             :
-            <p>Game details here</p>
+            <Card >
+                <Card.Title>{game.name}</Card.Title>
+            </Card>
         }
             
         </div>
