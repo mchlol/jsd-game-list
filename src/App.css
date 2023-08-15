@@ -2,13 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+
+h1,
+h2,
+h3,
+#app-nav {
+  font-family: 'Silkscreen', cursive;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#app-nav h1 {
+  font-size: 2rem;
 }
 
 #searchForm {

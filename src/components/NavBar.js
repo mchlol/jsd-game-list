@@ -13,13 +13,17 @@ function NavBar() {
     }
 
     return (
-        <Navbar className="p-4 flex justify-between">
+        <Navbar id="app-nav" className="p-4 flex justify-between">
         <div className="flex-1">
             <Button tag="a" className="text-xl normal-case" color="ghost"
             onClick={navigateHome}
             >
-              GameList
+              Search
             </Button>
+        </div>
+
+        <div className="flex-none">
+            <h1>GameList</h1>
         </div>
 
         <div className="flex-1">
