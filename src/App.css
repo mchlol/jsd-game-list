@@ -12,12 +12,18 @@
 }
 
 #searchForm {
-  margin: 1em;
-  width: 80%;
+  margin: 0 auto;
+  max-width: 80%;
+  text-align: center;
+}
+
+#searchForm button {
+  margin: 0 auto;
+  width: fit-content;
 }
 
 .searchBtn {
-  display: inline-block;
+  display: inline;
 }
 
 #searchResults {
@@ -41,8 +47,8 @@
 } */
 
 .game-card {
-  flex: 0 1 200px;
-  border: 1px solid red;
+  flex: 0 1 300px;
+  border: 1px solid black;
 }
 
 .spanFormat {
