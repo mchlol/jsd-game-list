@@ -3,8 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Loading, Card, Button, Badge } from "react-daisyui";
 import GameScreenshots from "./GameScreenshots";
-import { addToList } from "../functions";
-import { formatDate } from "../functions";
+import { addToList, formatDate } from "../functions";
 
 function ViewGame () {
 
@@ -15,8 +14,20 @@ function ViewGame () {
     const [loading,setLoading] = useState(true);
     const [error,setError] = useState(null);
 
+    const [items, setItems] = useState([]);
+
     useEffect( () => {
-        console.log('Use effect callback!');
+        // get the wishlist object from local storage
+        // copy it into a variable
+        // push another object into the array
+        const getWishlist = JSON.parse(localStorage.getItem('wishlist'));
+        console.log(getWishlist);
+
+        localStorage.setItem('testItem',JSON.stringify(items));
+
+    }, [items]);
+
+    useEffect( () => {
         loadGameDetails(params.slug);
     }, [params.slug]);
 
@@ -56,28 +67,28 @@ function ViewGame () {
             :
             <Card className="gameDetails p-4 m-2">
 
-                <div className="gameHeader">
+                <div className="p-2 gameHeader">
                     <Card.Title>{game.name}</Card.Title>
                     <span>{formatDate(game.released)}</span> 
                 </div>
 
-                <div className="pt-2 gameInfo">
+                <div className="p-2 gameInfo">
                     <p>Developers: {game.developers[0].name}</p>
                     <p>Platforms: {game.parent_platforms.map( platform => <span>{platform.platform.name} | </span>)}</p>
-                    <p>Genres: {game.genres.map(genre => <span>{genre.name} </span>)}</p>
+                    <p>Genres: {game.genres.map(genre => <span>{genre.name} | </span>)}</p>
                     <p>Metacritic rating: <Badge color="accent">{game.metacritic}</Badge></p>
                 </div>
 
                 <div className="p-2">
                     <Button 
                     className="btn btn-secondary btn-sm"
-                    onClick={ () => addToList(game) } 
+                    onClick={ () => addToList('wishlist',game) } 
                     >
-                        Add to My List
+                        Add to wishlist
                     </Button>
                 </div>
 
-                <div className="gameScreenshotsContainer">
+                <div className="gameScreenshotsContainer p-2">
                     <h3>Screenshots</h3>
                     <GameScreenshots />
                 </div>
@@ -90,6 +101,14 @@ function ViewGame () {
                         View on RAWG.io
                     </Button>
                     </a>
+                </div>
+
+                <div className="p-2">
+                    <Button
+                    onClick={ () => navigate(-1)} 
+                    >
+                        Back
+                    </Button>
                 </div>
             
             </Card>

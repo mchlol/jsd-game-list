@@ -1,3 +1,5 @@
+// contains any functions that may need to be used in more than one component.
+
 const formatDate = function(date) {
     if (date === null) {
         return 'Unknown'
@@ -54,4 +56,57 @@ const formatDate = function(date) {
     
 }; // formatDate
 
-export { formatDate };
+// list functions
+// lists object in local storage should look like
+/*
+    { lists: {
+        { 'wishlist' : [ {gameObj}, {gameObj}, {gameObj} ] }
+        { 'played' : [ {gameObj}, {gameObj} ] }
+    ]}
+
+    in local storage:
+    { 
+        'wishlist': [],
+    }
+*/
+
+const createList = function(listName) {
+    console.log(`Creating new list in localStorage`);
+
+    const listToAdd = {
+        listName: listName,
+        listData: [],
+    }
+
+    // if the list already exists, it will be overwritten?
+    // if it doesn't exist it will be created
+
+
+    localStorage.setItem('myLists', JSON.stringify(listToAdd));
+};
+
+const addToList = function(listName,gameObj) {
+        console.log('Adding to local storage');
+
+        // get the required list
+        // store it in a variable
+        const getList = JSON.parse(localStorage.getItem(listName));
+        // push the object to the array
+        getList.push(gameObj);
+        // store the new key value back in local storage
+        localStorage.setItem('wishlist',JSON.stringify(getList));
+        console.log(JSON.parse(localStorage.getItem('wishlist')));
+}
+
+const getList = function(listName) {
+    console.log(`Retrieving ${listName} from localStorage`);
+
+    return JSON.parse(localStorage.getItem('myLists',`${listName}`));
+}
+
+export { 
+    formatDate, 
+    createList,
+    addToList,
+    getList,
+};

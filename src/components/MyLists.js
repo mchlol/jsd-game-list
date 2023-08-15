@@ -1,62 +1,51 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
-import { Loading, Card, Button } from "react-daisyui";
+import { useNavigate } from "react-router";
+import { Card, Button} from "react-daisyui";
 import { formatDate } from "../functions";
-
 
 function MyLists() {
 
-    const params = useParams();
-
     const navigate = useNavigate();
 
-    const [list,setList] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    // retrieve a list
+
+    const [wishlist,setWishlist] = useState([]);
 
     useEffect( () => {
-        console.log('My list useEffect callback running');
-        loadList(params.query)
-    }, [params.query]);
+        console.log('My lists useEffect callback running');
+
+        // localStorage should look like { wishlist: [ {obj}, {obj}, ] }
+
+        // create a key in local storage called 'wishlist' with an array to start pushing game objects
+        // cant do this until the user goes to add something
+        // create the key and put the required object in its array
+
+        // localStorage.setItem('wishlist', JSON.stringify([]));
+
+
+        // check if there is a wishlist key in localstorage
+
+        setWishlist(JSON.parse(localStorage.getItem('wishlist')));
+
+        console.log(wishlist);
+
+    }, []); 
     
-    function loadList (query) {
-        setLoading(true);
-
-        // user will curate a list - the list is an array of game slugs
-        // stored in localStorage
-
-        // do we have to make an ajax request for each game slug in a list?
-
-        // eg. query would be each individual slug in the list/array
-        axios.get(`https://rawg.io/api/games?search=${query}&token&key=${process.env.REACT_APP_API_KEY}`)
-        .then (res => {
-            console.log('Response:',res);
-            setGames(res.data.results);
-            setLoading(false);
-        })
-        .catch( err => {
-            console.log('Error:',err);
-            setError(err);
-            setLoading(false);
-        })
-    } // loadSearchResults
-
-    if (error) {
-        return <p>Could not load list.</p>
-    }
 
     return (
-        <>
-        <div>
-            {
-                loading
-                ?
-                <Loading />
-                :
-                <div id="userList">
+        <div id="viewLists" className="p-4">
 
-                    { games.map( game =>
+            <div id="aboutLists" className="p-2">
+                <h2>My Lists</h2>
+                <p>Shows lists of games, each game title links to the ViewGame component for that game and has a delete badge to remove it from the list.</p>
+            </div>
+
+            <div id="listOfLists" className="p-2 border grid grid-cols-2">
+
+                    <div className="p-2 border">
+                        <h3>Wishlist</h3>
+                        <ul className="list-disc">
+                        { wishlist.map( game =>
                     <Card 
                     className="p-4 max-w-md game-card"
                     onClick={ () => navigate(`/game/${game.slug}`)} 
@@ -74,18 +63,11 @@ function MyLists() {
                         </Card.Body>
                     </Card> 
                     ) } 
+                        </ul>
+                    </div>
 
-                    <Button
-                    onClick={ () => navigate(-1)}>
-                    Back
-                    </Button>
-                </div>
-                
-            }
-            
+            </div>
         </div>
-        
-        </>
     )
 }
 
