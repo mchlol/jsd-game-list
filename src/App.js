@@ -23,6 +23,8 @@ function App() {
         <Routes>
           <Route path="/" element={<SearchForm />} />
 
+          <Route path="/search/popular" element={<SearchResults />} />
+
           <Route path="/search/:query" element={<SearchResults />} />
 
           <Route path="/game/:slug" element={<ViewGame />} />
@@ -30,7 +32,7 @@ function App() {
           <Route path="/my-lists" element={<MyLists />} />
         </Routes>
 
-        <Footer className="p-4 bg-primary text-secondary-content">
+        <Footer className="p-4 bg-primary text-secondary-content text-center" style={{textAlign: 'center'}}>
           <div>
             <p>
               All data provided by <Link to="https://rawg.io/" rel="noreferrer" target="_blank">RAWG.io</Link>

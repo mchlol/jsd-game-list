@@ -23,7 +23,16 @@ function SearchResults() {
     function loadSearchResults (query) {
         setLoading(true);
 
-        axios.get(`https://rawg.io/api/games?search=${query}&token&key=${process.env.REACT_APP_API_KEY}`)
+        // if the user didn't add a query (ie search is for empty string) show popular games
+
+        let url;
+        if (query) {
+            url = `https://rawg.io/api/games?search=${query}&token&key=${process.env.REACT_APP_API_KEY}`;
+        } else {
+            url = `https://rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}`;
+        }
+
+        axios.get(url)
         .then (res => {
             console.log('Response:',res);
             setGames(res.data.results);

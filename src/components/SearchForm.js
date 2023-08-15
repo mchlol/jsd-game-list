@@ -10,7 +10,13 @@ function SearchForm() {
     function handleSubmit(ev) {
         ev.preventDefault();
         console.log('Form submitted',ev.target.value);
-        navigate(`/search/${query}`);
+        // if query was blank return search for popular games
+        if (query) {
+            navigate(`/search/${query}`);
+        } else {
+            navigate('/search/popular');
+        }
+        
     }
 
     return (
