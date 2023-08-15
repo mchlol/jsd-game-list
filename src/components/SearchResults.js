@@ -100,7 +100,7 @@ function SearchResults() {
                 games.map( game =>
                 <Card 
                 className="max-w-md game-card"
-                onClick={ () => navigate(`/${game.slug}`)} 
+                onClick={ () => navigate(`/game/${game.slug}`)} 
                 key={game.slug} 
                 >
                     <Card.Image className="gameImg" src={game.background_image} alt={game.name} />
@@ -115,10 +115,11 @@ function SearchResults() {
                     </Card.Body>
                 </Card> 
                 )
+                
             }
-            
+            <Button>Next Page →</Button>
         </div>
-        <Button>Next Page →</Button>
+        
         </>
     )
 }

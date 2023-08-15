@@ -11,6 +11,15 @@
   pointer-events: none;
 }
 
+#searchForm {
+  margin: 1em;
+  width: 80%;
+}
+
+.searchBtn {
+  display: inline-block;
+}
+
 #searchResults {
   display: flex;
   flex-flow: row wrap;

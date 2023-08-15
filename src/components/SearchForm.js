@@ -14,10 +14,12 @@ function SearchForm() {
     }
 
     return (
-        <Form className="join" id="searchForm" onSubmit={handleSubmit}>
-            <Input bordered type="text" placeholder="Search games" className="" onChange={ev => setQuery(ev.target.value)} />
-            <Button className="w-24">Search</Button>
-        </Form>
+        <div id="searchForm">
+            <Form className="join" id="searchForm" onSubmit={handleSubmit}>
+                <Input bordered type="text" placeholder="Search games" className="" onChange={ev => setQuery(ev.target.value)} />
+                <Button className="btn searchBtn">Search</Button>
+            </Form>
+        </div>
     );
 }
 
