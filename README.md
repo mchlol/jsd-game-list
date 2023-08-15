@@ -22,13 +22,22 @@ The challenge is hiding the API key provided from RAWG, though not specifically 
 
 ### Build and routing
 
-I'll build the SPA with React and use React Router to create links. I might also use Tailwind CSS.  
+I'll build the SPA with React and use React Router to create links. I might also use Tailwind CSS and DaisyUI for Tailwind components.  
 
-### Data
+### User Data
 
 I'll use `localStorage` to save the user data.  
-I considered using Firebase but hiding the API key and working with React and React Router will be challenging enough given the timeframe (5 days, in the evenings after work 😅).  
+I considered using Firebase but hiding the API key and working with React and React Router will be challenging enough given the short timeframe.
 
 ### TODO:
 - Update the readme as I go, including wireframes and screenshots.  
 - List any features I may add later.  
+
+### Resources
+
+- figma.com
+- https://api.rawg.io/docs
+- https://rawgthedocs.orels.sh/api
+- https://corsproxy.io/
+- https://react.daisyui.com
+- https://daisyui.com/docs/
