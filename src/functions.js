@@ -94,7 +94,7 @@ const addToList = function(listName,gameObj) {
         // push the object to the array
         getList.push(gameObj);
         // store the new key value back in local storage
-        localStorage.setItem('wishlist',JSON.stringify(getList));
+        localStorage.setItem(listName,JSON.stringify(getList));
         console.log(JSON.parse(localStorage.getItem('wishlist')));
 }
 
@@ -104,9 +104,29 @@ const getList = function(listName) {
     return JSON.parse(localStorage.getItem('myLists',`${listName}`));
 }
 
+const removeFromList = function(listName, gameObj) {
+    console.log(`Deleting ${gameObj.slug} from ${listName}`);
+
+    // make a copy of the list in a variable
+    const getList = JSON.parse(localStorage.getItem(listName));
+
+    // get the index in the list's array of the specified object
+    const gameId = gameObj.id; // the value to search for
+
+    const foundId = getList.findIndex( (element) => element.id === gameId);
+    console.log('Found ID:',foundId) // returns the index of the obj with matching id
+
+    // use a method to remove the object with matching id from the list - slice? nope - sPlice
+    getList.splice(foundId, 1);
+    console.log(getList);
+    // save over the list in storage with the new value
+    localStorage.setItem(listName,JSON.stringify(getList));
+}
+
 export { 
     formatDate, 
     createList,
     addToList,
+    removeFromList,
     getList,
 };
