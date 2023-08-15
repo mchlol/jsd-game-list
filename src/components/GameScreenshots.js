@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Loading, Button, Carousel } from "react-daisyui";
 
 function GameScreenshots() {
     const params = useParams();
+    const navigate = useNavigate();
 
     const [screenshots,setScreenshots] = useState([]);
     const [loading,setLoading] = useState(true);
@@ -60,7 +61,10 @@ function GameScreenshots() {
                 </Carousel>
                 
             }
-            <Button>Back</Button>
+            <Button
+            onClick={ () => navigate(-1)} 
+            >
+            Back</Button>
         </div>
     )
 
