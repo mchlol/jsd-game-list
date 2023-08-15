@@ -12,7 +12,7 @@ function GameScreenshots() {
     const [error,setError] = useState(null);
 
     useEffect( () => {
-        console.log('GameScreenshots useEffect callback');
+        // console.log('GameScreenshots useEffect callback');
         loadScreenshots(params.slug);
     }, [params.slug]);
 
@@ -26,9 +26,9 @@ function GameScreenshots() {
 
         axios.get(`https://corsproxy.io/?https%3A%2F%2Frawg.io%2Fapi%2Fgames%2F${slug}%2Fscreenshots%3Fkey%3Da2fbc003e2d445e19986345bc468db3c`)
         .then( res => {
-            console.log('Response:',res);
+            // console.log('Response:',res);
             setScreenshots(res.data.results);
-            console.log(screenshots);
+            // console.log('Screenshots:',screenshots);
             setLoading(false);
         })
         .catch(err => {
@@ -61,10 +61,7 @@ function GameScreenshots() {
                 </Carousel>
                 
             }
-            <Button
-            onClick={ () => navigate(-1)} 
-            >
-            Back</Button>
+            
         </div>
     )
 
