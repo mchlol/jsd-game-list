@@ -13,7 +13,7 @@ function NavBar() {
     }
 
     return (
-        <Navbar>
+        <Navbar className="p-4 flex justify-between">
         <div className="flex-1">
             <Button tag="a" className="text-xl normal-case" color="ghost"
             onClick={navigateHome}
@@ -23,7 +23,7 @@ function NavBar() {
         </div>
 
         <div className="flex-1">
-            <Button tag="a" shape="square" color="ghost"
+            <Button tag="a" className="text-xl btn btn-primary"
             onClick={navigateToLists}
             >
               My Lists
@@ -31,6 +31,8 @@ function NavBar() {
         </div>
 
       </Navbar>
+
+      
     );
 }
 
