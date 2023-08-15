@@ -1,9 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Loading, Card, Button } from "react-daisyui";
+import { Loading, Card, Button, Badge } from "react-daisyui";
 import GameScreenshots from "./GameScreenshots";
 import { addToList } from "../functions";
+import { formatDate } from "../functions";
 
 function ViewGame () {
 
@@ -57,14 +58,14 @@ function ViewGame () {
 
                 <div className="gameHeader">
                     <Card.Title>{game.name}</Card.Title>
-                    <span>{game.released}</span> 
+                    <span>{formatDate(game.released)}</span> 
                 </div>
 
-                <div className="gameInfo">
+                <div className="pt-2 gameInfo">
                     <p>Developers: {game.developers[0].name}</p>
                     <p>Platforms: {game.parent_platforms.map( platform => <span>{platform.platform.name} | </span>)}</p>
                     <p>Genres: {game.genres.map(genre => <span>{genre.name} </span>)}</p>
-                    <p>Metacritic rating: {game.metacritic}</p>
+                    <p>Metacritic rating: <Badge color="accent">{game.metacritic}</Badge></p>
                 </div>
 
                 <div className="p-2">
@@ -81,10 +82,10 @@ function ViewGame () {
                     <GameScreenshots />
                 </div>
 
-                <div className="p-2">
+                <div className="p-2 mx-auto" style={{textAlign: 'center'}}>
                     <a href={`https://www.rawg.io/games/${game.slug}`} target="_blank">
                     <Button
-                    className="btn btn-primary"
+                    className="btn btn-outline"
                     >
                         View on RAWG.io
                     </Button>
