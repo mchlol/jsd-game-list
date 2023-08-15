@@ -4,6 +4,7 @@ import { Route, Routes, HashRouter as Router, Link } from 'react-router-dom';
 import SearchResults from './components/SearchResults';
 import SearchForm from './components/SearchForm';
 import ViewGame from './components/ViewGame';
+import MyLists from './components/MyLists';
 import { Button, Navbar, Footer } from 'react-daisyui';
 
 function App() {
@@ -43,6 +44,8 @@ function App() {
           <Route path="/search/:query" element={<SearchResults />} />
 
           <Route path="/game/:slug" element={<ViewGame />} />
+
+          <Route path="/mylists" element={<MyLists />} />
         </Routes>
 
         <Footer className="p-4 bg-primary text-secondary-content">
