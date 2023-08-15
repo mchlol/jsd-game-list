@@ -27,7 +27,7 @@ function SearchResults() {
 
         let url;
         if (query) {
-            url = `https://rawg.io/api/games?search=${query}&token&key=${process.env.REACT_APP_API_KEY}`;
+            url = `https://rawg.io/api/games?search=${query}&ordering=-rating&token&key=${process.env.REACT_APP_API_KEY}`;
         } else {
             url = `https://rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}`;
         }
@@ -57,7 +57,7 @@ function SearchResults() {
                 ?
                 <Loading />
                 :
-                <div id="searchResults">
+                <div className="searchResults">
 
                     { games.map( game =>
                     <Card 
