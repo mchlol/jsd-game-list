@@ -5,7 +5,8 @@ import SearchResults from './components/SearchResults';
 import SearchForm from './components/SearchForm';
 import ViewGame from './components/ViewGame';
 import MyLists from './components/MyLists';
-import { Button, Navbar, Footer } from 'react-daisyui';
+import NavBar from './components/NavBar';
+import { Footer } from 'react-daisyui';
 
 function App() {
 
@@ -16,42 +17,23 @@ function App() {
     <div className="App-header">
       <Router>
 
-          <Navbar>
-            <div className="flex-1">
-              <Link to="/">
-                <Button tag="a" className="text-xl normal-case" color="ghost">
-                  GameList
-                </Button>
-              </Link>
-            </div>
-
-            <div className="flex-1">
-              <Link to="/my-lists">
-                <Button tag="a" shape="square" color="ghost">
-                  My Lists
-                </Button>
-              </Link>
-            </div>
-
-          </Navbar>
+        <NavBar />
 
 
         <Routes>
           <Route path="/" element={<SearchForm />} />
 
-          {/* <Route path="/my-lists" element={<MyLists /> } /> */}
-
           <Route path="/search/:query" element={<SearchResults />} />
 
           <Route path="/game/:slug" element={<ViewGame />} />
 
-          <Route path="/mylists" element={<MyLists />} />
+          <Route path="/my-lists" element={<MyLists />} />
         </Routes>
 
         <Footer className="p-4 bg-primary text-secondary-content">
           <div>
             <p>
-              Data provided by <a className="link link-hover" href="https://rawg.io/" target="_blank">RAWG.io</a>
+              All data provided by <Link to="https://rawg.io/" rel="noreferrer" target="_blank">RAWG.io</Link>
             </p>
           </div>
         </Footer>
