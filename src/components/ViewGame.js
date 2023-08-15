@@ -1,12 +1,14 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Loading, Card } from "react-daisyui";
+import { Loading, Card, Button } from "react-daisyui";
 import GameScreenshots from "./GameScreenshots";
+import { addToList } from "../functions";
 
 function ViewGame () {
 
     const params = useParams();
+    const navigate = useNavigate();
 
     const [game,setGame] = useState('');
     const [loading,setLoading] = useState(true);
@@ -55,19 +57,38 @@ function ViewGame () {
 
                 <div className="gameHeader">
                     <Card.Title>{game.name}</Card.Title>
-                    <span>{game.released}</span>
+                    <span>{game.released}</span> 
                 </div>
 
                 <div className="gameInfo">
                     <p>Developers: {game.developers[0].name}</p>
-                    <p>Platforms: {game.parent_platforms.map( platform => <span>{platform.platform.name} </span>)}</p>
+                    <p>Platforms: {game.parent_platforms.map( platform => <span>{platform.platform.name} | </span>)}</p>
                     <p>Genres: {game.genres.map(genre => <span>{genre.name} </span>)}</p>
                     <p>Metacritic rating: {game.metacritic}</p>
+                </div>
+
+                <div className="p-2">
+                    <Button 
+                    className="btn btn-secondary btn-sm"
+                    onClick={ () => addToList(game) } 
+                    >
+                        Add to My List
+                    </Button>
                 </div>
 
                 <div className="gameScreenshotsContainer">
                     <h3>Screenshots</h3>
                     <GameScreenshots />
+                </div>
+
+                <div className="p-2">
+                    <a href={`https://www.rawg.io/games/${game.slug}`} target="_blank">
+                    <Button
+                    className="btn btn-primary"
+                    >
+                        View on RAWG.io
+                    </Button>
+                    </a>
                 </div>
             
             </Card>
