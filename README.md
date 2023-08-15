@@ -15,6 +15,16 @@ The app will have five 'pages':
 
 --- insert wireframe screenshot ----
 
+#### TODO:
+
+- Back buttons
+- Pagination for search results
+- set up list saving functionality
+- google font for site header
+- navbar alignment
+- search form alignment
+
+
 ### Deployment
 
 The app will be hosted on Netlify [here](https://jsd-game-list.netlify.app/)  
