@@ -36,12 +36,12 @@ function ViewGame () {
         setLoading(true);
 
         const callApi = `https://rawg.io/api/games/${slug}&token&key=${process.env.REACT_APP_API_KEY}`;
-        // returns a CORS error
+        // same call as for games but for a specific game it returns a CORS error
 
         const url = 'https://corsproxy.io/?' + encodeURIComponent(callApi);
-        // returns a bad request error
+        // CORS ok but now it returns a bad request error
 
-        // this works but exposes the API key 😤
+        // this works just fine...but exposes the API key 😤
         axios.get(`https://corsproxy.io/?https%3A%2F%2Frawg.io%2Fapi%2Fgames%2F${slug}%3Fkey%3Da2fbc003e2d445e19986345bc468db3c`)
         .then (res => {
             console.log('Response:',res);
