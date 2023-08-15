@@ -42,7 +42,7 @@ function App() {
 
           <Route path="/search/:query" element={<SearchResults />} />
 
-          <Route path="/:slug" element={<ViewGame />} />
+          <Route path="/game/:slug" element={<ViewGame />} />
         </Routes>
 
         <Footer className="p-4 bg-primary text-secondary-content">
