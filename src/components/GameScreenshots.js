@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Loading } from "react-daisyui";
+import { Loading, Button, Carousel } from "react-daisyui";
 
 function GameScreenshots() {
     const params = useParams();
@@ -48,19 +48,19 @@ function GameScreenshots() {
                 ?
                 <Loading />
                 :
-                <div>
-                    <p>Game screenshots go here!</p>
+                <Carousel className="rounded-box">
+                { screenshots.map( screenshot =>
 
-                    { screenshots.map(screenshot => {
-                        <img
-                        style="width: 100px" 
-                        src={`${screenshot.image}`} 
-                        alt="" 
-                        key={screenshot.id}
-                        />
-                    })}
-                </div>
+                    <Carousel.Item key={screenshot.id} className="game-screenshot" 
+                    src={screenshot.image} 
+                    alt="game screenshot" 
+                    />
+                
+                )}
+                </Carousel>
+                
             }
+            <Button>Back</Button>
         </div>
     )
 
