@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Card, Button } from "react-daisyui";
-import { formatDate } from "../functions";
+// import { formatDate } from "../functions";
 import BackButton from "./BackButton";
 import { removeFromList } from "../functions";
 
@@ -31,15 +31,15 @@ function MyLists() {
         // adding to wish list is handled on the details page
         console.log('Wishlist:',wishlist);
 
-    }, [wishlist]); 
+    }, []); 
 
 
     return (
         <div id="viewLists" className="p-4">
 
             <div id="aboutLists" className="p-2">
-                <h2 className="text-lg">My Lists</h2>
-                <p>Shows lists of games, each game title links to the ViewGame component for that game and has a delete badge to remove it from the list.</p>
+                <h2 className="text-xl text-center">My Lists</h2>
+
                 {/* <span>Jump to: </span> 
                 <a href="#wishlistHeading"><button className="badge badge-primary">Wishlist</button></a> 
                 | 
