@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Card, Button} from "react-daisyui";
 import { formatDate } from "../functions";
+import BackButton from "./BackButton";
 
 function MyLists() {
 
@@ -67,6 +68,8 @@ function MyLists() {
                     </div>
 
             </div>
+
+            <BackButton />
         </div>
     )
 }

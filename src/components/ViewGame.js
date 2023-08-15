@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Loading, Card, Button, Badge } from "react-daisyui";
 import GameScreenshots from "./GameScreenshots";
+import BackButton from "./BackButton";
 import { addToList, formatDate } from "../functions";
 
 function ViewGame () {
@@ -103,13 +104,7 @@ function ViewGame () {
                     </a>
                 </div>
 
-                <div className="p-2">
-                    <Button
-                    onClick={ () => navigate(-1)} 
-                    >
-                        Back
-                    </Button>
-                </div>
+                <BackButton/>
             
             </Card>
 
