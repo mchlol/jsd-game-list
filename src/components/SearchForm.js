@@ -16,8 +16,8 @@ function SearchForm() {
     return (
         <div id="searchForm">
             <Form className="join" id="searchForm" onSubmit={handleSubmit}>
-                <Input bordered type="text" placeholder="Search games" className="" onChange={ev => setQuery(ev.target.value)} />
-                <Button className="btn searchBtn">Search</Button>
+                <Input bordered type="text" placeholder="Search games" className="join-item" onChange={ev => setQuery(ev.target.value)} /> 
+                <Button className="btn btn-secondary join-item">Search</Button>
             </Form>
         </div>
     );
