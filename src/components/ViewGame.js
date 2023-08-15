@@ -45,16 +45,16 @@ function ViewGame () {
     }
 
     return (
-        <div id="#gameDetailsContainer">
+        <div id="#gameDetailsContainer" className="mb-3">
         {
             loading
             ?
             <Loading />
             :
-            <div className="gameDetails">
+            <Card className="gameDetails p-4 m-2">
 
                 <div className="gameHeader">
-                    <h2>{game.name}</h2>
+                    <Card.Title>{game.name}</Card.Title>
                     <span>{game.released}</span>
                 </div>
 
@@ -70,7 +70,7 @@ function ViewGame () {
                     <GameScreenshots />
                 </div>
             
-            </div>
+            </Card>
 
         }
             
