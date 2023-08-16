@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import { Loading, Card, Button } from "react-daisyui";
+import { Loading, Card, Button, Pagination } from "react-daisyui";
 import { formatDate } from "../functions";
+import ReactPaginate from 'react-paginate';
 
 
 function SearchResults() {
@@ -15,31 +16,22 @@ function SearchResults() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const[page, setPage] = useState(1);
+    const [page, setPage] = useState(1);
+    const [requestUrl, setRequestUrl] = useState('');
+    
+    // useEffect( () => {
+    //     console.log('useEffect callback running');
+    //     loadSearchResults(params.query);
+    // }, [params.query]);
+
 
     useEffect( () => {
-        console.log('useEffect callback running');
-        loadSearchResults(params.query);
-    }, [params.query]);
+        console.log('SearchResults useEffect callback running')
 
-    useEffect ( () => {
-        console.log('page useeffect callback');
-
-    },[page]);
-    
-    function loadSearchResults (query) {
         setLoading(true);
 
-        // if the user didn't add a query (ie search is for empty string) show popular games
-
-        let url;
-        if (query) {
-            url = `https://rawg.io/api/games?search=${query}&ordering=-rating&page=${page}&page_size=20&token&key=${process.env.REACT_APP_API_KEY}`;
-        } else {
-            url = `https://rawg.io/api/games?page=${page}&page_size=20&key=${process.env.REACT_APP_API_KEY}`;
-        }
-
-        axios.get(url)
+        
+        axios.get(params.query ? `https://rawg.io/api/games?search=${params.query}&page=${page}&page_size=&token&key=${process.env.REACT_APP_API_KEY}` : `https://rawg.io/api/games?page=${page}&page_size=20&token&key=${process.env.REACT_APP_API_KEY}`)
         .then (res => {
             console.log('Response:',res);
             setGames(res.data.results);
@@ -50,7 +42,10 @@ function SearchResults() {
             setError(err);
             setLoading(false);
         })
-    } // loadSearchResults
+
+    },[page, requestUrl]);
+    
+
 
     if (error) {
         return <p>Could not load search results.</p>
@@ -65,8 +60,12 @@ function SearchResults() {
                 <Loading />
                 :
                 <div>
+                    
+                    <h2 className="p-4">Showing results for: "{params.query}"</h2>
+
                     <div className="searchResults">
 
+                    
                         { games.map( game =>
                         <Card 
                         className="p-4 max-w-md game-card"
@@ -89,19 +88,30 @@ function SearchResults() {
                     </div>
 
                     <div className="p-4 flex justify-center">
-                        <Button 
-                        disabled={page === 1}
-                        onClick={ () => setPage( (prevState) => prevState -1)}
-                        >
-                            ← Previous
-                        </Button>
-                        <p>Page {page}</p>
-                        <Button
-                        onClick={() => setPage( (prevState) => prevState + 1)}
-                        >
-                            Next →
-                        </Button>
+
+                        <Pagination>
+
+                            <Button 
+                            disabled={page === 1} 
+                            onClick={ () => setPage( (prevState) => prevState - 1)}
+                            className="join-item">
+                                ←
+                            </Button>
+
+                            <Button 
+                            className="join-item">
+                                Page {page}
+                            </Button>
+
+                            <Button 
+                            className="join-item"
+                            onClick={ () => setPage( (prevState) => prevState + 1)}>
+                                →
+                            </Button>
+
+                        </Pagination>
                     </div>
+
                 </div>
                 
             }
