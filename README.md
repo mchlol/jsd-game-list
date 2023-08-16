@@ -19,15 +19,17 @@ The app will have five 'pages':
 #### TODO:
 
 <!-- - Back buttons -->
-- Pagination for search results (and lists?)
-- add header to search results to show what the user searched for
-- set up list saving functionality
+<!-- - Pagination for search results (and lists?) -->
+<!-- - add header to search results to show what the user searched for -->
+- add route for pagination
 - delete from list and update on page
+- set up list saving functionality
 <!-- - google font for site header -->
 <!-- - navbar alignment -->
-- search form alignment
+<!-- - search form alignment -->
 - add github repo link to footer
 - stick footer to bottom of page
+- add recommendations to ViewGame
 
 
 - Update the readme as I go, including wireframes and screenshots.  

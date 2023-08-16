@@ -70,14 +70,18 @@ function ViewGame () {
 
                 <div className="p-2 gameHeader">
                     <Card.Title>{game.name}</Card.Title>
-                    <span>{formatDate(game.released)}</span> 
+                    <span >{formatDate(game.released)}</span> 
                 </div>
 
                 <div className="p-2 gameInfo">
                     <p>Developers: {game.developers[0].name}</p>
-                    <p>Platforms: {game.parent_platforms.map( platform => <span>{platform.platform.name} | </span>)}</p>
-                    <p>Genres: {game.genres.map(genre => <span>{genre.name} | </span>)}</p>
-                    <p>Metacritic rating: <Badge color="accent">{game.metacritic}</Badge></p>
+                    <p>Platforms: {game.parent_platforms.map( platform => 
+                        <span key={platform.platform.name}>{platform.platform.name} | </span>
+                        )}</p>
+                    <p>Genres: {game.genres.map(genre => 
+                        <span key={genre.name}>{genre.name} | </span>
+                        )}</p>
+                    <span>Metacritic rating:</span> <Badge color="accent">{game.metacritic}</Badge>
                 </div>
 
                 <div className="p-2">

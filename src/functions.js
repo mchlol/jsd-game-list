@@ -85,24 +85,34 @@ const createList = function(listName) {
     localStorage.setItem('myLists', JSON.stringify(listToAdd));
 };
 
+const getList = function(listName) {
+    console.log(`Retrieving ${listName} from localStorage`);
+    // if a key with this name is in local storage, retrieve it
+    // if it doesn't exist, create it?
+    const getList = JSON.parse(localStorage.getItem(listName));
+    if (getList) {
+        console.log('list found',getList);
+    } else {
+        localStorage.setItem(listName,[]);
+    }
+
+    return getList;
+}
+
 const addToList = function(listName,gameObj) {
         console.log('Adding to local storage');
 
-        // get the required list
-        // store it in a variable
-        const getList = JSON.parse(localStorage.getItem(listName));
+        // get the required list & store it in a variable
+        const list = getList(listName);
+
         // push the object to the array
-        getList.push(gameObj);
+        list.push(gameObj);
         // store the new key value back in local storage
-        localStorage.setItem(listName,JSON.stringify(getList));
-        console.log(JSON.parse(localStorage.getItem('wishlist')));
+        localStorage.setItem(listName,JSON.stringify(list));
+        console.log(JSON.parse(localStorage.getItem(list)));
 }
 
-const getList = function(listName) {
-    console.log(`Retrieving ${listName} from localStorage`);
 
-    return JSON.parse(localStorage.getItem('myLists',`${listName}`));
-}
 
 const removeFromList = function(listName, gameObj) {
     console.log(`Deleting ${gameObj.slug} from ${listName}`);
