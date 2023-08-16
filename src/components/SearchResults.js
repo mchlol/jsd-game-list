@@ -17,13 +17,6 @@ function SearchResults() {
     const [error, setError] = useState(null);
 
     const [page, setPage] = useState(1);
-    const [requestUrl, setRequestUrl] = useState('');
-    
-    // useEffect( () => {
-    //     console.log('useEffect callback running');
-    //     loadSearchResults(params.query);
-    // }, [params.query]);
-
 
     useEffect( () => {
         console.log('SearchResults useEffect callback running')
@@ -43,7 +36,7 @@ function SearchResults() {
             setLoading(false);
         })
 
-    },[page, requestUrl]);
+    },[page]);
     
 
 
@@ -90,7 +83,7 @@ function SearchResults() {
                     <div className="p-4 flex justify-center">
 
                         <Pagination>
-
+                            {/* set the next page on button click or go back a page */}
                             <Button 
                             disabled={page === 1} 
                             onClick={ () => setPage( (prevState) => prevState - 1)}
