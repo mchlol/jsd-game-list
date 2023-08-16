@@ -1,6 +1,6 @@
 // import { useEffect, useState } from 'react';
 import './App.css';
-import { Route, Routes, HashRouter as Router, Link } from 'react-router-dom';
+import { Route, Routes, HashRouter as Router } from 'react-router-dom';
 import SearchResults from './components/SearchResults';
 import SearchForm from './components/SearchForm';
 import ViewGame from './components/ViewGame';
@@ -9,8 +9,6 @@ import NavBar from './components/NavBar';
 import { Footer } from 'react-daisyui';
 
 function App() {
-
-  
 
   return (
 
@@ -27,12 +25,14 @@ function App() {
 
           <Route path="/search/:query" element={<SearchResults />} />
 
+          <Route path="/search/:query/page/:1" element={<SearchResults />} />
+
           <Route path="/game/:slug" element={<ViewGame />} />
 
           <Route path="/my-lists" element={<MyLists />} />
         </Routes>
 
-        <Footer className="p-4 bg-primary text-secondary-content flex place-content-center">
+        <Footer className="p-4 bg-primary text-secondary-content place-content-center">
 
               <div className="flex justify-center">
               All data provided by <a href="https://rawg.io/" rel="noreferrer" target="_blank">RAWG.io</a>
