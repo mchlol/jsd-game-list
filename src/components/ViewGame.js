@@ -66,7 +66,7 @@ function ViewGame () {
             ?
             <Loading />
             :
-            <Card className="gameDetails p-4 m-2">
+            <Card className="gameDetails p-4 m-2" key={game.name}>
 
                 <div className="p-2 gameHeader">
                     <Card.Title>{game.name}</Card.Title>
@@ -95,12 +95,12 @@ function ViewGame () {
                 </div>
 
                 <div className="p-2 mx-auto" style={{textAlign: 'center'}}>
-                    <a href={`https://www.rawg.io/games/${game.slug}`} target="_blank">
-                    <Button
-                    className="btn btn-outline"
-                    >
-                        View on RAWG.io
-                    </Button>
+                    <a href={`https://www.rawg.io/games/${game.slug}`}          target="_blank">
+                        <Button
+                        className="btn btn-outline"
+                        >
+                            View on RAWG.io
+                        </Button>
                     </a>
                 </div>
 
