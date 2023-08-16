@@ -31,7 +31,7 @@ function MyLists() {
         // adding to wish list is handled on the details page
         console.log('Wishlist:',wishlist);
 
-    }, []); 
+    }, []); // if this array is empty, the component wont re-render when the value of the list changes (a game is deleted) - but if we put wishlist in it, it triggers an infinite loop
 
 
     return (
