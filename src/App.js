@@ -32,12 +32,13 @@ function App() {
           <Route path="/my-lists" element={<MyLists />} />
         </Routes>
 
-        <Footer className="p-4 bg-primary text-secondary-content text-center" style={{textAlign: 'center'}}>
-          <div>
-            <p>
-              All data provided by <Link to="https://rawg.io/" rel="noreferrer" target="_blank">RAWG.io</Link>
-            </p>
-          </div>
+        <Footer className="p-4 bg-primary text-secondary-content flex place-content-center">
+
+              <div className="flex justify-center">
+              All data provided by <a href="https://rawg.io/" rel="noreferrer" target="_blank">RAWG.io</a>
+              </div>
+
+          
         </Footer>
 
       </Router>
