@@ -15,19 +15,6 @@ function ViewGame () {
     const [loading,setLoading] = useState(true);
     const [error,setError] = useState(null);
 
-    // const [wishlist, setWishlist] = useState([]);
-
-    // useEffect( () => {
-    //     // get the wishlist object from local storage
-    //     // copy it into a variable
-    //     // use that value in setWishlist
-    //     localStorage.setItem('wishlist',JSON.stringify(wishlist));
-    //     const list = localStorage.getItem('wishlist');
-    //     setWishlist(list);
-    //     console.log(wishlist);
-
-    // }, []);
-
     useEffect( () => {
         loadGameDetails(params.slug);
     }, [params.slug]);
@@ -101,7 +88,7 @@ function ViewGame () {
             ?
             <Loading />
             :
-            <Card className="gameDetails p-4 m-2" key={game.name}>
+            <Card className="gameDetails p-4 m-2" id="viewGame" key={game.name}>
 
                 <div className="p-2 gameHeader">
                     <Card.Title>{game.name}</Card.Title>
