@@ -24,7 +24,12 @@ function SearchResults() {
         setLoading(true);
 
         
-        axios.get(params.query ? `https://rawg.io/api/games?search=${params.query}&page=${page}&page_size=&token&key=${process.env.REACT_APP_API_KEY}` : `https://rawg.io/api/games?page=${page}&page_size=20&token&key=${process.env.REACT_APP_API_KEY}`)
+        axios.get(
+            params.query 
+            ? 
+            `https://rawg.io/api/games?search=${params.query}&page=${page}&page_size=&token&key=${process.env.REACT_APP_API_KEY}` 
+            : 
+            `https://rawg.io/api/games?page=${page}&page_size=20&token&key=${process.env.REACT_APP_API_KEY}`)
         .then (res => {
             // console.log('Response:',res);
             setGames(res.data.results);
