@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { Card, Button } from "react-daisyui";
 // import { formatDate } from "../functions";
 import BackButton from "./BackButton";
-import { removeFromList } from "../functions";
+import { removeFromList, getList } from "../functions";
 
 function MyLists() {
 
@@ -15,21 +15,12 @@ function MyLists() {
 
     useEffect( () => {
         console.log('My lists useEffect callback running');
+        const wishlist = JSON.parse(localStorage.getItem('wishlist'));
+        console.log('wishlist:',wishlist);
 
-        // localStorage should look like { wishlist: [ {obj}, {obj}, ] }
-
-        // create a key in local storage called 'wishlist' with an array to start pushing game objects
-        // cant do this until the user goes to add something or it will be overwritten with an empty array?
-        // create the key and put the required object in its array
-
-        // localStorage.setItem('wishlist', JSON.stringify([]));
-
-
-        // check if there is a wishlist key in localstorage
-
-        setWishlist(JSON.parse(localStorage.getItem('wishlist')));
-        // adding to wish list is handled on the details page
-        console.log('Wishlist:',wishlist);
+        if (wishlist) {
+            setWishlist(wishlist);
+        }
 
     }, []); // if this array is empty, the component wont re-render when the value of the list changes (a game is deleted) - but if we put wishlist in it, it triggers an infinite loop
 
@@ -40,7 +31,8 @@ function MyLists() {
             <div id="aboutLists" className="p-2">
                 <h2 className="text-xl text-center">My Lists</h2>
 
-                {/* <span>Jump to: </span> 
+                {/* ## if there were multiple lists this is where they would go: ##
+                <span>Jump to: </span> 
                 <a href="#wishlistHeading"><button className="badge badge-primary">Wishlist</button></a> 
                 | 
                 <a href="#favlistHeading"><button className="badge badge-primary">Favourites</button></a> 

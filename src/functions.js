@@ -88,15 +88,15 @@ const createList = function(listName) {
 const getList = function(listName) {
     console.log(`Retrieving ${listName} from localStorage`);
     // if a key with this name is in local storage, retrieve it
-    // if it doesn't exist, create it?
-    const getList = JSON.parse(localStorage.getItem(listName));
-    if (getList) {
-        console.log('list found',getList);
+    // if it doesn't exist, create it
+    let userList;
+    if (localStorage.getItem(listName)) {
+        console.log('list found',userList);
     } else {
         localStorage.setItem(listName,[]);
     }
-
-    return getList;
+    console.log('userList',userList)
+    return userList;
 }
 
 const addToList = function(listName,gameObj) {

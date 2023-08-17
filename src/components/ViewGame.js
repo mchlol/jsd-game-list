@@ -15,22 +15,23 @@ function ViewGame () {
     const [loading,setLoading] = useState(true);
     const [error,setError] = useState(null);
 
-    const [items, setItems] = useState([]);
+    // const [wishlist, setWishlist] = useState([]);
 
-    useEffect( () => {
-        // get the wishlist object from local storage
-        // copy it into a variable
-        // push another object into the array
-        const getWishlist = JSON.parse(localStorage.getItem('wishlist'));
-        console.log(getWishlist);
+    // useEffect( () => {
+    //     // get the wishlist object from local storage
+    //     // copy it into a variable
+    //     // use that value in setWishlist
+    //     localStorage.setItem('wishlist',JSON.stringify(wishlist));
+    //     const list = localStorage.getItem('wishlist');
+    //     setWishlist(list);
+    //     console.log(wishlist);
 
-        localStorage.setItem('testItem',JSON.stringify(items));
-
-    }, [items]);
+    // }, []);
 
     useEffect( () => {
         loadGameDetails(params.slug);
     }, [params.slug]);
+
 
     function loadGameDetails(slug) {
         setLoading(true);
@@ -54,6 +55,24 @@ function ViewGame () {
             setLoading(false);
         })
     } // loadGameDetails
+
+    function handleClick(listName,gameObj) {
+
+        // if the wishlists array from useEffect calls its data from localStorage
+        // we can just add a game object to it
+        console.log('Adding game to ' + listName,gameObj);
+        const list = JSON.parse(localStorage.getItem(listName));
+        list.push(gameObj);
+        console.log(list);
+        localStorage.setItem(listName,JSON.stringify(list));
+
+    }
+
+    // attempt to encode html entities?
+    function parseText(str) {
+        let text = new DOMParser().parseFromString(str, "text/html");
+        return text.documentElement.textContent;
+    }
 
     if (error) {
         return <p>Could not get game details.</p>
@@ -87,10 +106,14 @@ function ViewGame () {
                 <div className="p-2">
                     <Button 
                     className="btn btn-secondary btn-sm"
-                    onClick={ () => addToList('wishlist',game) } 
+                    onClick={ () => handleClick('wishlist',game) } 
                     >
                         Add to wishlist
                     </Button>
+                </div>
+
+                <div className="p-2">
+                    {parseText(game.description)}
                 </div>
 
                 <div className="gameScreenshotsContainer p-2">
