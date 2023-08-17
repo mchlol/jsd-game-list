@@ -70,6 +70,24 @@ const formatDate = function(date) {
     }
 */
 
+const joinArray = function(array) {
+    let joined = [];
+    array.forEach(obj => {
+        joined.push(obj.name);
+    });
+    joined = joined.join(', ');
+    return joined;
+};
+
+const joinPlatformArray = function(array) {
+    let joined = [];
+    array.forEach(obj => {
+        joined.push(obj.platform.name);
+    })
+    joined = joined.join(' | ');
+    return joined;
+}
+
 const createList = function(listName) {
     console.log(`Creating new list in localStorage`);
 
@@ -135,6 +153,8 @@ const removeFromList = function(listName, gameObj) {
 
 export { 
     formatDate, 
+    joinArray,
+    joinPlatformArray,
     createList,
     addToList,
     removeFromList,

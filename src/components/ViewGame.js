@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Loading, Card, Button, Badge } from "react-daisyui";
 import GameScreenshots from "./GameScreenshots";
 import BackButton from "./BackButton";
-import { addToList, formatDate } from "../functions";
+import { addToList, formatDate, joinArray, joinPlatformArray } from "../functions";
 
 function ViewGame () {
 
@@ -86,24 +86,25 @@ function ViewGame () {
         {
             loading
             ?
-            <Loading />
+            <div className="p-4 flex justify-center">
+                <Loading color="primary"/>
+            </div>
             :
             <Card className="gameDetails p-4 m-2" id="viewGame" key={game.name}>
 
-                <div className="p-2 gameHeader">
-                    <Card.Title>{game.name}</Card.Title>
-                    <span >{formatDate(game.released)}</span> 
+                <div className="p-2 gameHeader" style={ {
+                    background: `url(${game.background_image}) no-repeat fixed center`,
+
+                    } }>
+                    <Card.Title className="text-2xl">{game.name}</Card.Title>
                 </div>
 
                 <div className="p-2 gameInfo">
-                    <p>Developers: {game.developers[0].name}</p>
-                    <p>Platforms: {game.parent_platforms.map( platform => 
-                        <span key={platform.platform.name}>{platform.platform.name} | </span>
-                        )}</p>
-                    <p>Genres: {game.genres.map(genre => 
-                        <span key={genre.name}>{genre.name} | </span>
-                        )}</p>
-                    <span>Metacritic rating:</span> <Badge color="accent">{game.metacritic}</Badge>
+                    <p><strong>Released:</strong> <span >{formatDate(game.released)}</span> </p>
+                    <p><strong>Developers:</strong> {joinArray(game.developers)}</p>
+                    <p><strong>Platforms:</strong> {joinPlatformArray(game.parent_platforms)}</p>
+                    <p><strong>Genres:</strong> {joinArray(game.genres)}</p>
+                    <span><strong>Metacritic rating:</strong></span> {game.metacritic ? <Badge color="accent">{game.metacritic}</Badge> : <span>N/A</span> }
                 </div>
 
                 <div className="p-2">
@@ -116,7 +117,8 @@ function ViewGame () {
                 </div>
 
                 <div className="p-2">
-                    {parseText(game.description)}
+                    <p>{parseText(game.description)}</p>
+                    {/* {game.description_raw} */}
                 </div>
 
                 <div className="gameScreenshotsContainer p-2">
