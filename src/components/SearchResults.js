@@ -50,7 +50,9 @@ function SearchResults() {
             {
                 loading
                 ?
-                <Loading />
+                <div className="p-4 flex justify-center">
+                    <Loading color="primary"/>
+                </div>
                 :
                 <div>
                     
