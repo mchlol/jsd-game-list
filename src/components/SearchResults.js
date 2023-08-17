@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { Loading, Card, Button, Pagination } from "react-daisyui";
 import { formatDate } from "../functions";
-import ReactPaginate from 'react-paginate';
+// import ReactPaginate from 'react-paginate';
 
 
 function SearchResults() {
@@ -19,14 +19,14 @@ function SearchResults() {
     const [page, setPage] = useState(1);
 
     useEffect( () => {
-        console.log('SearchResults useEffect callback running')
+        // console.log('SearchResults useEffect callback running')
 
         setLoading(true);
 
         
         axios.get(params.query ? `https://rawg.io/api/games?search=${params.query}&page=${page}&page_size=&token&key=${process.env.REACT_APP_API_KEY}` : `https://rawg.io/api/games?page=${page}&page_size=20&token&key=${process.env.REACT_APP_API_KEY}`)
         .then (res => {
-            console.log('Response:',res);
+            // console.log('Response:',res);
             setGames(res.data.results);
             setLoading(false);
         })

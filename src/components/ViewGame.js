@@ -13,7 +13,7 @@ function ViewGame () {
 
     const [game,setGame] = useState('');
     const [gameRecs,setGameRecs] = useState([]);
-    const [button,setButton] = useState('');
+    const [gameAdded,setGameAdded] = useState(false);
     const [loading,setLoading] = useState(true);
     const [error,setError] = useState(null);
 
@@ -34,9 +34,11 @@ function ViewGame () {
         // this works just fine...but exposes the API key 😤
         axios.get(`https://corsproxy.io/?https%3A%2F%2Frawg.io%2Fapi%2Fgames%2F${slug}%3Fkey%3Da2fbc003e2d445e19986345bc468db3c`)
         .then (res => {
-            console.log('Response:',res);
+            // console.log('Response:',res);
             setGame(res.data);
             setLoading(false);
+
+
         })
         .catch( err => {
             console.log('Error',err);
@@ -63,7 +65,7 @@ function ViewGame () {
     function handleClick(listName,gameObj,ev) {
         // if the wishlists array from useEffect calls its data from localStorage
         // we can just add a game object to it
-        console.log('Adding game to ' + listName,gameObj);
+        // console.log('Adding game to ' + listName,gameObj);
         const list = JSON.parse(localStorage.getItem(listName));
 
         // check if the obj already exists in the list array
@@ -74,19 +76,22 @@ function ViewGame () {
         const foundId = list.findIndex( (element) => element.id === gameId);
         console.log('Found ID:',foundId) // returns the index of the obj with matching id
 
-        console.log('button',ev.target); 
+        // console.log('button',ev.target); 
         const button = ev.target;
-        button.className = 'btn btn-success btn-sm';
-        button.textContent = 'added to wishlist';
+
         if (foundId === -1) {
             list.push(gameObj);
+            button.className = 'btn btn-success btn-sm';
+            button.textContent = 'added to wishlist';
             
         } else {
-            console.log('game is already added to this list')
+            console.log('game is already added to this list');
+            button.className = 'btn btn-success btn-sm';
+            button.textContent = 'already in wishlist';
         }
         
 
-        console.log(list);
+        // console.log(list);
 
         localStorage.setItem(listName,JSON.stringify(list));
 

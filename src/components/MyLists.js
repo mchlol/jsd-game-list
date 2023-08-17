@@ -15,9 +15,9 @@ function MyLists() {
     const [listChanged,setListChanged] = useState(false);
 
     useEffect( () => {
-        console.log('My lists useEffect callback running');
+        // console.log('My lists useEffect callback running');
         const wishlist = JSON.parse(localStorage.getItem('wishlist'));
-        console.log('wishlist:',wishlist);
+        // console.log('wishlist:',wishlist);
 
         if (wishlist) {
             setWishlist(wishlist); // this can't be here 
@@ -28,7 +28,7 @@ function MyLists() {
     // how to display the list on mount, and also re-render if that value changes?
 
     const removeFromList = function(listName, gameObj) {
-        console.log(`Deleting ${gameObj.slug} from ${listName}`);
+        // console.log(`Deleting ${gameObj.slug} from ${listName}`);
     
         // make a copy of the list in a variable
         const getList = JSON.parse(localStorage.getItem(listName));
@@ -37,11 +37,11 @@ function MyLists() {
         const gameId = gameObj.id; // the value to search for
     
         const foundId = getList.findIndex( (element) => element.id === gameId);
-        console.log('Found ID:',foundId) // returns the index of the obj with matching id
+        // console.log('Found ID:',foundId) // returns the index of the obj with matching id
     
         // use a method to remove the object with matching id from the list - slice? nope - sPlice
         getList.splice(foundId, 1);
-        console.log(getList);
+        // console.log(getList);
         // save over the list in storage with the new value
         localStorage.setItem(listName,JSON.stringify(getList));
 

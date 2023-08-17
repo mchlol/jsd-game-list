@@ -9,7 +9,7 @@ function SearchForm() {
 
     function handleSubmit(ev) {
         ev.preventDefault();
-        console.log('Form submitted',ev.target.value);
+        // console.log('Form submitted',ev.target.value);
         // if query was blank return search for popular games
         if (query) {
             navigate(`/search/${query}`);
