@@ -12,6 +12,7 @@ function MyLists() {
     // retrieve a list
 
     const [wishlist,setWishlist] = useState([]);
+    const [listChanged,setListChanged] = useState(false);
 
     useEffect( () => {
         console.log('My lists useEffect callback running');
@@ -22,7 +23,7 @@ function MyLists() {
             setWishlist(wishlist); // this can't be here 
         }
 
-    }, []); // if this array is empty, the component wont re-render when the value of the list changes (a game is deleted) - but if we put wishlist in it, it triggers an infinite loop
+    }, [listChanged]); // if this array is empty, the component wont re-render when the value of the list changes (a game is deleted) - but if we put wishlist in it, it triggers an infinite loop
     // the infinite loop happens because useEffect is calling setWishlist effectively changing the value, so the component continues to rerender - set the value, render, set the value, render etc. 
     // how to display the list on mount, and also re-render if that value changes
     // setWishlist call needs to be moved somewhere else - but where?
@@ -46,6 +47,7 @@ function MyLists() {
         localStorage.setItem(listName,JSON.stringify(getList));
 
         // how to refresh the component?
+        setListChanged(true);
     }
 
     return (
