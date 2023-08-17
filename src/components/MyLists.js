@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { Card, Button } from "react-daisyui";
 // import { formatDate } from "../functions";
 import BackButton from "./BackButton";
-import { removeFromList, getList } from "../functions";
+// import { removeFromList, getList } from "../functions";
 
 function MyLists() {
 
@@ -19,11 +19,34 @@ function MyLists() {
         console.log('wishlist:',wishlist);
 
         if (wishlist) {
-            setWishlist(wishlist);
+            setWishlist(wishlist); // this can't be here 
         }
 
     }, []); // if this array is empty, the component wont re-render when the value of the list changes (a game is deleted) - but if we put wishlist in it, it triggers an infinite loop
+    // the infinite loop happens because useEffect is calling setWishlist effectively changing the value, so the component continues to rerender - set the value, render, set the value, render etc. 
+    // how to display the list on mount, and also re-render if that value changes
+    // setWishlist call needs to be moved somewhere else - but where?
 
+    const removeFromList = function(listName, gameObj) {
+        console.log(`Deleting ${gameObj.slug} from ${listName}`);
+    
+        // make a copy of the list in a variable
+        const getList = JSON.parse(localStorage.getItem(listName));
+    
+        // get the index in the list's array of the specified object
+        const gameId = gameObj.id; // the value to search for
+    
+        const foundId = getList.findIndex( (element) => element.id === gameId);
+        console.log('Found ID:',foundId) // returns the index of the obj with matching id
+    
+        // use a method to remove the object with matching id from the list - slice? nope - sPlice
+        getList.splice(foundId, 1);
+        console.log(getList);
+        // save over the list in storage with the new value
+        localStorage.setItem(listName,JSON.stringify(getList));
+
+        // how to refresh the component?
+    }
 
     return (
         <div id="viewLists" className="p-4">
