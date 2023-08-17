@@ -35,7 +35,7 @@ The app will have five 'pages':
 - add github repo link to footer
 - stick footer to bottom of page
 - add recommendations to ViewGame
-- format ViewGame display
+<!-- - format ViewGame display -->
 - show the number of screenshots
 - add a favicon to replace default react icon
 
