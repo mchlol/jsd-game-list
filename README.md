@@ -34,23 +34,23 @@ The app will have five 'pages':
 <!-- - Back buttons -->
 <!-- - Pagination for search results (and lists?) -->
 <!-- - add header to search results to show what the user searched for -->
-- add route for pagination
+- add routes for pagination
 <!-- - add a welcome message to the home/search page -->
 <!-- - delete from list and update on page -->
-- set up list saving functionality
+- set up custom list functionality
 <!-- - if game is already in list don't add it -->
 <!-- - display confirmation on game save -->
 <!-- - google font for site header -->
 <!-- - navbar alignment -->
 <!-- - search form alignment -->
 - add github repo link to footer
-- stick footer to bottom of page
-- add recommendations to ViewGame
+- stick footer to bottom of page (why is this so hard?)
+<!-- - add recommendations to ViewGame -->
 <!-- - format ViewGame display -->
 - show the number of screenshots
 - add a favicon to replace default react icon
 
-- add wireframes and screenshots to readme
+<!-- - add wireframes and screenshots to readme -->
 
 ## Deployment
 
@@ -83,7 +83,8 @@ User data (the custom lists) are saved and retrieved from  `localStorage`.
 - View games by most popular in a genre
 - Search for trending or most popular games
 
-## Issues
+
+## Technical Hurdles
 
 ### Pagination
 
@@ -92,6 +93,3 @@ I went around in circles with this for a while. I even tried making a separate c
 ### useEffect infinite loop
 
 In the MyLists component, I call the wishlist key from localStorage. Setting this list as the dependency triggers an infinite loop as the key gets called and set within useEffect. I read [this post by Dan Abromov](https://overreacted.io/a-complete-guide-to-useeffect/) and created a boolean `listChanged` and use that as the dependency instead - so when a user deletes a game from the list, `listChanged` is updated to true. This works once. But when the user deletes another game straightaway the view does not update. This is fixed by also updating the `wishlist` variable in state. Then it triggers a re-render.  
-
-
-

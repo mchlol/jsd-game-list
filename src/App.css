@@ -12,20 +12,9 @@ h3,
   font-family: 'Silkscreen', cursive;
 }
 
-#app-nav {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
-
-#app-nav h1 {
-  font-size: 2rem;
-}
 
 /* .App-header {
-  height: 100vh;
-  margin-bottom: 60px;
-  position: absolute;
+  height: calc(100vh - 70px);
 } */
 
 /* 
@@ -77,9 +66,13 @@ h3,
   }
 } */
 
-.appFooter {
+#appFooter {
+  /* height: 60px;
   position: fixed;
-  bottom: 0;
+  bottom: 0; */
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 .game-card {

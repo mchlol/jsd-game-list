@@ -20,12 +20,10 @@ function MyLists() {
         // console.log('wishlist:',wishlist);
 
         if (wishlist) {
-            setWishlist(wishlist); // this can't be here 
+            setWishlist(wishlist); 
         }
 
-    }, [listChanged]); // if this array is empty, the component wont re-render when the value of the list changes (a game is deleted) - but if we put wishlist in it, it triggers an infinite loop
-    // the infinite loop happens because useEffect is calling setWishlist effectively changing the value, so the component continues to rerender - set the value, render, set the value, render etc. 
-    // how to display the list on mount, and also re-render if that value changes?
+    }, [listChanged]); 
 
     const removeFromList = function(listName, gameObj) {
         // console.log(`Deleting ${gameObj.slug} from ${listName}`);
