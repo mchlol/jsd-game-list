@@ -2,7 +2,13 @@
 
 My final project for General Assembly JavaScript Development.
 
---- insert screenshot ---
+### Screenshots
+
+![screenshot](./screenshots/ViewGame.gif)  
+
+![screenshot](./screenshots/SearchResults.png)  
+
+![screenshot](./screenshots/MyLists.png)
 
 
 ## Plan
@@ -16,7 +22,12 @@ The app will have five 'pages':
 - a 'my game lists' page, which shows all lists the user has created.  
 - a detailed view of a users list, showing the games and any notes the user has added, maybe in a table?  
 
---- insert wireframe screenshot ---
+### Wireframes
+
+![wireframe](./screenshots/searchresults_wireframe.png)  
+
+![wireframe](./screenshots/viewgame_wireframe.png)
+
 
 #### TODO:
 
@@ -24,11 +35,11 @@ The app will have five 'pages':
 <!-- - Pagination for search results (and lists?) -->
 <!-- - add header to search results to show what the user searched for -->
 - add route for pagination
-- add a welcome message to the home/search page
+<!-- - add a welcome message to the home/search page -->
 <!-- - delete from list and update on page -->
 - set up list saving functionality
 <!-- - if game is already in list don't add it -->
-- display confirmation on game save
+<!-- - display confirmation on game save -->
 <!-- - google font for site header -->
 <!-- - navbar alignment -->
 <!-- - search form alignment -->
