@@ -2,7 +2,7 @@
 
 const formatDate = function(date) {
     if (date === null) {
-        return 'Unknown'
+        return 'Unknown';
     } else {
         // date is either null or YYYY-MM-DD
     const year = date.slice(0,4);

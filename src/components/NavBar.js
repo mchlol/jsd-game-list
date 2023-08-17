@@ -23,7 +23,7 @@ function NavBar() {
         </div>
 
         <div className="flex-none">
-            <h1 onClick={navigateHome}>GameList</h1>
+            <h1 className="text-xl app-header" onClick={navigateHome}>GameList</h1>
         </div>
 
         <div className="flex-1">

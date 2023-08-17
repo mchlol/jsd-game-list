@@ -1,4 +1,3 @@
-// import { useEffect, useState } from 'react';
 import './App.css';
 import { Route, Routes, HashRouter as Router } from 'react-router-dom';
 import SearchResults from './components/SearchResults';

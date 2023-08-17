@@ -9,6 +9,7 @@ function BackButton() {
 
             <div className="p-2">
             <Button
+            style={{marginBottom: '70px'}}
             onClick={ () => navigate(-1)} 
             >
                 Back

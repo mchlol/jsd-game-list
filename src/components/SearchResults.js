@@ -91,7 +91,8 @@ function SearchResults() {
 
                     <div className="p-4 flex justify-center">
 
-                        <Pagination>
+                        <Pagination
+                        style={{marginBottom: '70px'}}>
                             {/* set the next page on button click or go back a page */}
                             <Button 
                             disabled={page === 1} 
