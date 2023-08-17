@@ -62,8 +62,24 @@ function ViewGame () {
         // we can just add a game object to it
         console.log('Adding game to ' + listName,gameObj);
         const list = JSON.parse(localStorage.getItem(listName));
-        list.push(gameObj);
+
+        // check if the obj already exists in the list array
+
+        // get the index in the list's array of the specified object
+        const gameId = gameObj.id; // the value to search for
+    
+        const foundId = list.findIndex( (element) => element.id === gameId);
+        console.log('Found ID:',foundId) // returns the index of the obj with matching id
+
+        if (foundId === -1) {
+            list.push(gameObj);
+        } else {
+            console.log('game is already added to this list')
+        }
+        
+
         console.log(list);
+
         localStorage.setItem(listName,JSON.stringify(list));
 
     }
@@ -71,7 +87,7 @@ function ViewGame () {
     // attempt to encode html entities?
     function parseText(str) {
         let text = new DOMParser().parseFromString(str, "text/html");
-        return text.documentElement.textContent;
+        return text.documentElement.innerText;
     }
 
     if (error) {
