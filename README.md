@@ -30,6 +30,7 @@ The app will have five 'pages':
 - add github repo link to footer
 - stick footer to bottom of page
 - add recommendations to ViewGame
+- format ViewGame display
 
 
 - Update the readme as I go, including wireframes and screenshots.  
