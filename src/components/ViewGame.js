@@ -77,6 +77,7 @@ function ViewGame () {
         console.log('button',ev.target); 
         const button = ev.target;
         button.className = 'btn btn-success btn-sm';
+        button.textContent = 'added to wishlist';
         if (foundId === -1) {
             list.push(gameObj);
             

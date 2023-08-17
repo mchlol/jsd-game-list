@@ -56,14 +56,16 @@ function SearchResults() {
                 :
                 <div>
                     
-                    <h2 className="p-4">Showing results for: "{params.query}"</h2>
+                    <h2 className="p-4">
+                        { params.query ? `Showing results for ${params.query}` : 'Showing popular games'}
+                    </h2>
 
                     <div className="searchResults">
 
                     
                         { games.map( game =>
                         <Card 
-                        className="p-4 max-w-md game-card"
+                        className="max-w-md game-card"
                         onClick={ () => navigate(`/game/${game.slug}`)} 
                         key={game.slug} 
                         >

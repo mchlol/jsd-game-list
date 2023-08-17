@@ -77,8 +77,9 @@ h3,
   }
 } */
 
-.test {
-  border: 1px solid red;
+.appFooter {
+  position: fixed;
+  bottom: 0;
 }
 
 .game-card {
@@ -101,12 +102,17 @@ a:hover {
 }
 
 .gameHeaderImg {
-  max-height: 600px;
+  object-fit: contain;
+  margin: 1em;
 }
 
 .spanFormat {
   display: block;
   font-size: 0.9rem;
+}
+
+.gameInfo {
+  margin-top: 1em;
 }
 
 .game-card img {

@@ -57,7 +57,7 @@ function MyLists() {
             <div id="aboutLists" className="p-2">
                 <h2 className="text-xl text-center">My Lists</h2>
 
-                {/* ## if there were multiple lists this is where they would go: ##
+                {/* ## if there were multiple lists this is where they would go: ## */}
                 <span>Jump to: </span> 
                 <a href="#wishlistHeading"><button className="badge badge-primary">Wishlist</button></a> 
                 | 
@@ -65,7 +65,7 @@ function MyLists() {
                 | 
                 <a href="#playedlistHeading"><button className="badge badge-primary">Played</button></a> 
                 | 
-                <button className="badge badge-outline badge-accent badge-l">Add New +</button> */}
+                <button className="badge badge-outline badge-accent badge-l">Add New +</button>
             </div>
 
             <div id="listOfLists" className="p-2 grid grid-cols-2">
