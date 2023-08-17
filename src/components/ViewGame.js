@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Loading, Card, Button, Badge } from "react-daisyui";
@@ -20,20 +20,6 @@ function ViewGame () {
         loadGameDetails(params.slug);
         getRecommendations(params.slug);
     }, [params.slug]);
-
-
-    function getRecommendations(slug) {
-        axios.get(`https://rawg.io/api/games?search=${slug}&page=1&page_size=3&token&key=${process.env.REACT_APP_API_KEY}`)
-
-        .then(res=> {
-            console.log('Recommendations:',res.data.results);
-            setGameRecs(res.data.results);
-            console.log(gameRecs);
-        })
-        .catch(err => {
-            console.log('Error',err);
-        })
-    } // getRecommendations
 
     function loadGameDetails(slug) {
         setLoading(true);
@@ -57,6 +43,21 @@ function ViewGame () {
             setLoading(false);
         })
     } // loadGameDetails
+
+    function getRecommendations(slug) {
+        setLoading(true);
+        axios.get(`https://rawg.io/api/games?search=${slug}&page=1&page_size=3&token&key=${process.env.REACT_APP_API_KEY}`)
+
+        .then(res=> {
+            // console.log('Recommendations:',res.data.results);
+            setGameRecs(res.data.results);
+            setLoading(false);
+            // console.log(gameRecs);
+        })
+        .catch(err => {
+            console.log('Error',err);
+        })
+    } // getRecommendations
 
     function handleClick(listName,gameObj) {
 
@@ -153,7 +154,18 @@ function ViewGame () {
 
                 <div className="p-2">
                     <h3>Recommendations:</h3>
-                    <p><em>coming soon!</em></p>
+                    <div>
+                        {gameRecs.map(rec => 
+                            <p key={rec.slug}
+                            >
+                                <Link
+                                onClick={ () => navigate(`/game/${rec.slug}`)}
+                                >
+                                    {rec.name}
+                                </Link>
+                            </p>
+                        )}
+                    </div>
                 </div>
 
                 <BackButton/>
