@@ -4,6 +4,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
 
+
 h1,
 h2,
 h3,
@@ -20,6 +21,20 @@ h3,
 #app-nav h1 {
   font-size: 2rem;
 }
+
+/* .App-header {
+  height: 100vh;
+  margin-bottom: 60px;
+  position: absolute;
+} */
+
+/* 
+#appFooter {
+  position: fixed;
+  height: 60px;
+  margin-top: 2rem;
+  bottom: 0;
+} */
 
 #searchForm {
   margin: 0 auto;
@@ -62,15 +77,31 @@ h3,
   }
 } */
 
+.test {
+  border: 1px solid red;
+}
+
 .game-card {
   flex: 0 1 300px;
   border: 1px solid black;
 }
 
+a {
+  text-decoration-line: underline;
+}
+
+a:hover {
+  text-decoration: none;
+}
 
 .gameHeader {
   font-family: 'Silkscreen', cursive;
   font-size: 2rem;
+  align-self: center;
+}
+
+.gameHeaderImg {
+  max-height: 600px;
 }
 
 .spanFormat {
@@ -79,9 +110,7 @@ h3,
 }
 
 .game-card img {
-  max-width: 200px;
-  max-height: 200px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .game-screenshot {

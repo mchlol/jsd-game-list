@@ -13,6 +13,7 @@ function ViewGame () {
 
     const [game,setGame] = useState('');
     const [gameRecs,setGameRecs] = useState([]);
+    const [button,setButton] = useState('');
     const [loading,setLoading] = useState(true);
     const [error,setError] = useState(null);
 
@@ -59,8 +60,7 @@ function ViewGame () {
         })
     } // getRecommendations
 
-    function handleClick(listName,gameObj) {
-
+    function handleClick(listName,gameObj,ev) {
         // if the wishlists array from useEffect calls its data from localStorage
         // we can just add a game object to it
         console.log('Adding game to ' + listName,gameObj);
@@ -74,8 +74,12 @@ function ViewGame () {
         const foundId = list.findIndex( (element) => element.id === gameId);
         console.log('Found ID:',foundId) // returns the index of the obj with matching id
 
+        console.log('button',ev.target); 
+        const button = ev.target;
+        button.className = 'btn btn-success btn-sm';
         if (foundId === -1) {
             list.push(gameObj);
+            
         } else {
             console.log('game is already added to this list')
         }
@@ -85,7 +89,9 @@ function ViewGame () {
 
         localStorage.setItem(listName,JSON.stringify(list));
 
-    }
+    } // handleClick
+
+
 
     // attempt to encode html entities?
     function parseText(str) {
@@ -106,14 +112,18 @@ function ViewGame () {
                 <Loading color="primary"/>
             </div>
             :
-            <Card className="gameDetails p-4 m-2" id="viewGame" key={game.name}>
+            <Card className="gameDetails p-4 m-2" 
+            id="viewGame" 
+            key={game.name}
+            >
 
-                <div className="p-2 gameHeader" style={ {
-                    background: `url(${game.background_image}) no-repeat fixed center`,
+                <Card.Title className="p-2 gameHeader text-2xl">{game.name}</Card.Title>
 
-                    } }>
-                    <Card.Title className="text-2xl">{game.name}</Card.Title>
+                <div className="p-2 gameHeaderImg">
+                    { <img src={game.background_image} alt="{game.name}" /> }
                 </div>
+
+                
 
                 <div className="p-2 gameInfo">
                     <p><strong>Released:</strong> <span >{formatDate(game.released)}</span> </p>
@@ -126,7 +136,9 @@ function ViewGame () {
                 <div className="p-2">
                     <Button 
                     className="btn btn-secondary btn-sm"
-                    onClick={ () => handleClick('wishlist',game) } 
+                    onClick={ ev => {
+                        handleClick('wishlist',game,ev);
+                    }} 
                     >
                         Add to wishlist
                     </Button>
@@ -134,7 +146,6 @@ function ViewGame () {
 
                 <div className="p-2">
                     <p>{parseText(game.description)}</p>
-                    {/* {game.description_raw} */}
                 </div>
 
                 <div className="gameScreenshotsContainer p-2">
@@ -157,12 +168,9 @@ function ViewGame () {
                     <div>
                         {gameRecs.map(rec => 
                             <p key={rec.slug}
+                            onClick={ () => navigate(`/game/${rec.slug}`)}
                             >
-                                <Link
-                                onClick={ () => navigate(`/game/${rec.slug}`)}
-                                >
-                                    {rec.name}
-                                </Link>
+                                {rec.name}
                             </p>
                         )}
                     </div>
