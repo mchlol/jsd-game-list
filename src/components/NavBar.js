@@ -13,7 +13,7 @@ function NavBar() {
     }
 
     return (
-        <Navbar id="app-nav" className="p-4 flex justify-between">
+        <Navbar id="app-nav" className="p-4 flex justify-between bg-base-100">
         <div className="flex-1">
             <Button tag="a" className="text-xl btn btn-secondary"
             onClick={navigateHome}
