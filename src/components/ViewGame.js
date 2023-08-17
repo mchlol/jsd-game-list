@@ -36,8 +36,12 @@ function ViewGame () {
         .then (res => {
             console.log('Response:',res);
             setGame(res.data);
-            setLoading(false);
 
+            // formatDate isn't called until setGame has a value
+            // even if loading is not set to false until the object has definitely loaded
+            if (game) {
+                setLoading(false)
+            }
 
         })
         .catch( err => {

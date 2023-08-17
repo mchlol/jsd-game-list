@@ -1,7 +1,7 @@
 // contains any functions that may need to be used in more than one component.
 
 const formatDate = function(date) {
-    if (date === null) {
+    if (date === null || date === undefined) {
         return 'Unknown';
     } else {
         // date is either null or YYYY-MM-DD
@@ -71,21 +71,30 @@ const formatDate = function(date) {
 */
 
 const joinArray = function(array) {
-    let joined = [];
+    if (array === undefined) {
+        return 'Unknown';
+    } else {
+        let joined = [];
     array.forEach(obj => {
         joined.push(obj.name);
     });
     joined = joined.join(', ');
     return joined;
+    }
+    
 };
 
 const joinPlatformArray = function(array) {
+    if (array === undefined) {
+        return 'Unknown';
+    } else {
     let joined = [];
     array.forEach(obj => {
         joined.push(obj.platform.name);
     })
     joined = joined.join(' | ');
     return joined;
+}
 }
 
 const createList = function(listName) {
