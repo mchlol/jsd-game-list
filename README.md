@@ -2,6 +2,8 @@
 
 My final project for General Assembly JavaScript Development.
 
+--- insert screenshot ---
+
 
 ## Plan
 
@@ -14,7 +16,7 @@ The app will have five 'pages':
 - a 'my game lists' page, which shows all lists the user has created.  
 - a detailed view of a users list, showing the games and any notes the user has added, maybe in a table?  
 
---- insert wireframe screenshot ----
+--- insert wireframe screenshot ---
 
 #### TODO:
 
@@ -22,8 +24,11 @@ The app will have five 'pages':
 <!-- - Pagination for search results (and lists?) -->
 <!-- - add header to search results to show what the user searched for -->
 - add route for pagination
-- delete from list and update on page
+- add a welcome message to the home/search page
+<!-- - delete from list and update on page -->
 - set up list saving functionality
+<!-- - if game is already in list don't add it -->
+- display confirmation on game save
 <!-- - google font for site header -->
 <!-- - navbar alignment -->
 <!-- - search form alignment -->
@@ -31,12 +36,10 @@ The app will have five 'pages':
 - stick footer to bottom of page
 - add recommendations to ViewGame
 - format ViewGame display
+- show the number of screenshots
+- add a favicon to replace default react icon
 
-
-- Update the readme as I go, including wireframes and screenshots.  
-- List any features I may add later.  
-
-
+- add wireframes and screenshots to readme
 
 ## Deployment
 
@@ -63,6 +66,11 @@ User data (the custom lists) are saved and retrieved from  `localStorage`.
 - https://github.com/AdeleD/react-paginate
 
 
+## Future Features
+
+- View a page for a specific developer showing their games. 
+- View games by most popular in a genre
+- Search for trending or most popular games
 
 ## Issues
 
@@ -70,7 +78,9 @@ User data (the custom lists) are saved and retrieved from  `localStorage`.
 
 I went around in circles with this for a while. I even tried making a separate component then realised I couldn't get the search query. Eventually I moved the entire axios request into useEffect and installed `react-paginate` to handle the rest. But another problem - I had an if/else to call the API with /games instead of /games/search if the user didn't enter a query. But the render was triggering before the request was finished (even though loading was set to true). I fixed this by using a ternary to decide which url to call. I figured this works within jsx, because if/else does not as it needs to return something.  
 
+### useEffect infinite loop
 
+In the MyLists component, I call the wishlist key from localStorage. Setting this list as the dependency triggers an infinite loop as the key gets called and set within useEffect. I read [this post by Dan Abromov](https://overreacted.io/a-complete-guide-to-useeffect/) and created a boolean `listChanged` and use that as the dependency instead - so when a user deletes a game from the list, `listChanged` is updated to true. This works once. But when the user deletes another game straightaway the view does not update. This is fixed by also updating the `wishlist` variable in state. Then it triggers a re-render.  
 
 
 
