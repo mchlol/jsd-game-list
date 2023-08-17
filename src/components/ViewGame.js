@@ -12,13 +12,28 @@ function ViewGame () {
     const navigate = useNavigate();
 
     const [game,setGame] = useState('');
+    const [gameRecs,setGameRecs] = useState([]);
     const [loading,setLoading] = useState(true);
     const [error,setError] = useState(null);
 
     useEffect( () => {
         loadGameDetails(params.slug);
+        getRecommendations(params.slug);
     }, [params.slug]);
 
+
+    function getRecommendations(slug) {
+        axios.get(`https://rawg.io/api/games?search=${slug}&page=1&page_size=3&token&key=${process.env.REACT_APP_API_KEY}`)
+
+        .then(res=> {
+            console.log('Recommendations:',res.data.results);
+            setGameRecs(res.data.results);
+            console.log(gameRecs);
+        })
+        .catch(err => {
+            console.log('Error',err);
+        })
+    } // getRecommendations
 
     function loadGameDetails(slug) {
         setLoading(true);
@@ -134,6 +149,11 @@ function ViewGame () {
                             View on RAWG.io
                         </Button>
                     </a>
+                </div>
+
+                <div className="p-2">
+                    <h3>Recommendations:</h3>
+                    <p><em>coming soon!</em></p>
                 </div>
 
                 <BackButton/>
