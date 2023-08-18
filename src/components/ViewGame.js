@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Loading, Card, Button, Badge } from "react-daisyui";
 import GameScreenshots from "./GameScreenshots";
 import BackButton from "./BackButton";
-import { addToList, formatDate, joinArray, joinPlatformArray } from "../functions";
+import { formatDate, joinArray, joinPlatformArray } from "../functions";
 
 function ViewGame () {
 
@@ -13,7 +13,7 @@ function ViewGame () {
 
     const [game,setGame] = useState('');
     const [gameRecs,setGameRecs] = useState([]);
-    const [gameAdded,setGameAdded] = useState(false);
+    const [gameIsInList,setGameIsInList] = useState(false);
     const [loading,setLoading] = useState(true);
     const [error,setError] = useState(null);
 
@@ -67,37 +67,40 @@ function ViewGame () {
     } // getRecommendations
 
     function handleClick(listName,gameObj,ev) {
-        // if the wishlists array from useEffect calls its data from localStorage
-        // we can just add a game object to it
         console.log('Adding game to ' + listName,gameObj);
+        // TODO: split into 2 functions for list handling and button handling
+        // 1. local storage
+        // get the key 'listName' from local storage & parse it
+        // check if it has a value & that value is an array
+        // if so, push gameObj to it
+        // if not, create the key with [gameObj]
+
         const list = JSON.parse(localStorage.getItem(listName));
-        console.log(list);
-        // check if the obj already exists in the list array
-
-        // get the index in the list's array of the specified object
-        const gameId = gameObj.id; // the value to search for
-    
-        const foundId = list.findIndex( (element) => element.id === gameId);
-        console.log('Found ID:',foundId) // returns the index of the obj with matching id
-
-        // console.log('button',ev.target); 
-        const button = ev.target;
-
-        if (foundId === -1) {
-            list.push(gameObj);
-            button.className = 'btn btn-success btn-sm';
-            button.textContent = 'added to wishlist';
+        console.log('check list first',list);
+        if (list && Array.isArray(list)) {
+            // check if the obj already exists in the list array
+            // get the index in the list's array of the specified object
+            const gameId = gameObj.id; // the value to search for
+            const foundId = list.findIndex( (element) => element.id === gameId);
+            console.log('Found ID:',foundId) // returns the index of the obj with matching id
+            const button = ev.target;
+            if (foundId === -1) {
+                console.log('game was not already added')
+                list.push(gameObj);
+                console.log('game pushed, list value changed',list);
+                localStorage.setItem(listName,JSON.stringify(list));
+                button.className = 'btn btn-success btn-sm';
+                button.textContent = `added to ${listName}`;
             
+            } else {
+                console.log('game is already added to this list');
+                button.className = 'btn btn-success btn-sm';
+                button.textContent = `already in ${listName}`;
+            }
         } else {
-            console.log('game is already added to this list');
-            button.className = 'btn btn-success btn-sm';
-            button.textContent = 'already in wishlist';
+            localStorage.setItem(listName,JSON.stringify([gameObj]));
         }
-        
 
-        // console.log(list);
-
-        localStorage.setItem(listName,JSON.stringify(list));
 
     } // handleClick
 
@@ -151,6 +154,15 @@ function ViewGame () {
                     }} 
                     >
                         Add to wishlist
+                    </Button>
+
+                    <Button 
+                    className="btn btn-secondary btn-sm"
+                    onClick={ ev => {
+                        handleClick('favourites',game,ev);
+                    }} 
+                    >
+                        Add to favourites
                     </Button>
                 </div>
 
