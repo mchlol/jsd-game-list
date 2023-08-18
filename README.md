@@ -49,6 +49,7 @@ The app will have five 'pages':
 <!-- - format ViewGame display -->
 - show the number of screenshots
 - add a favicon to replace default react icon
+- move the footer into a component
 
 <!-- - add wireframes and screenshots to readme -->
 
@@ -88,7 +89,7 @@ User data (the custom lists) are saved and retrieved from  `localStorage`.
 
 ### Pagination
 
-I went around in circles with this for a while. I even tried making a separate component then realised I couldn't get the search query. Eventually I moved the entire axios request into useEffect and installed `react-paginate` to handle the rest. But another problem - I had an if/else to call the API with /games instead of /games/search if the user didn't enter a query. But the render was triggering before the request was finished (even though loading was set to true). I fixed this by using a ternary to decide which url to call. I figured this works within jsx, because if/else does not as it needs to return something.  
+I went around in circles with this for a while. I even tried making a separate component then realised I couldn't get the search query. Eventually I moved the entire axios request into useEffect and installed `react-paginate` to handle the rest. But another problem - I had an if/else to call the API with /games instead of /games/search if the user didn't enter a query. But the render was triggering before the request was finished (even though loading was set to true). I fixed this by using a ternary within the axios call to decide which url to use. I figured this works within jsx, because if/else does not as it needs to return something, so it would work in this case too, and makes it clear what it is doing.  
 
 ### useEffect infinite loop
 
