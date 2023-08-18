@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { Card, Button } from "react-daisyui";
+import { Card, Button, Badge } from "react-daisyui";
 // import { formatDate } from "../functions";
 import BackButton from "./BackButton";
 // import { removeFromList, getList } from "../functions";
@@ -12,16 +12,25 @@ function MyLists() {
     // retrieve a list
 
     const [wishlist,setWishlist] = useState([]);
+    const [favourites,setFavourites] = useState([]);
+    const [played,setPlayed] = useState([]);
     const [listChanged,setListChanged] = useState(false);
 
     useEffect( () => {
         // console.log('My lists useEffect callback running');
         const wishlist = JSON.parse(localStorage.getItem('wishlist'));
+        const favourites = JSON.parse(localStorage.getItem('favourites'));
         // console.log('wishlist:',wishlist);
 
         if (wishlist) {
             setWishlist(wishlist); 
         }
+
+        if (favourites) {
+            setFavourites(favourites);
+        }
+
+
 
     }, [listChanged]); 
 
@@ -50,30 +59,90 @@ function MyLists() {
     }
 
     return (
+
         <div id="viewLists" className="p-4">
 
             <div id="aboutLists" className="p-2">
                 <h2 className="text-xl text-center">My Lists</h2>
 
-                {/* ## if there were multiple lists this is where they would go: ## */}
-                <span>Jump to: </span> 
-                <a href="#wishlistHeading"><button className="badge badge-primary">Wishlist</button></a> 
-                | 
-                <a href="#favlistHeading"><button className="badge badge-primary">Favourites</button></a> 
-                | 
-                <a href="#playedlistHeading"><button className="badge badge-primary">Played</button></a> 
-                | 
-                <button className="badge badge-outline badge-accent badge-l">Add New +</button>
+                <Badge className="m-2 p-4 badge badge-secondary badge-sm"
+                style={{margin: '0.5rem'}}>
+                    Wishlist
+                </Badge>
+
+                <Badge className="m-2 p-4 badge badge-secondary badge-sm"
+                style={{margin: '0.5rem'}}>
+                    Favourites
+                </Badge>
+
+                
+                <Badge className="m-2 p-4 badge badge-secondary badge-sm"
+                style={{margin: '0.5rem'}}>
+                    Played
+                </Badge>
+
+                {/* To be added */}
+                {/* <Badge className="m-2 p-4 badge badge-outline badge-accent badge-sm"
+                style={{margin: '0.5rem'}}>
+                    Add New +
+                </Badge> */}
+
             </div>
 
-            <div id="listOfLists" className="p-2 grid grid-cols-2">
+            <div id="listOfLists" className="p-2 grid grid-cols-3">
+                {/* TODO: these should be components */}
+
+                <div className="p-2 border">
+                    <h3 id="playedHeading">Played</h3>
+                    {
+                        played.length > 0
+                        ?
+                        <ul className="list-disc searchResults">
+                        { played.map( game =>
+                            <Card 
+                            className="max-w-md game-card"
+                            key={game.slug} 
+                            >
+                                <Card.Image className="gameImg" src={game.background_image} alt={game.name} />
+                                
+                                <Card.Body>
+                                    <Card.Title tag="h2">{game.name}
+                                </Card.Title>
+
+                                    <Card.Actions className="justify-end">
+                                        <Button 
+                                            className="btn btn-sm btn-primary"
+                                            onClick={ () => navigate(`/game/${game.slug}`)} 
+                                            >
+                                            View
+                                        </Button>
+                                        <Button 
+                                        className="btn btn-sm btn-accent"
+                                        onClick={ () => {
+                                            removeFromList('played',game)
+                                        }}>
+                                            Delete
+                                        </Button>
+                                    </Card.Actions>
+                                </Card.Body>
+                            </Card> 
+                    ) } 
+                        </ul>
+                        :
+                        <p>No played games to display.</p>
+                    }
+                    </div>
 
                     <div className="p-2 border">
                         <h3 id="wishlistHeading">Wishlist</h3>
+                    {
+                        wishlist.length > 0
+                        ?
+                        
                         <ul className="list-disc searchResults">
                         { wishlist.map( game =>
                             <Card 
-                            className="p-4 max-w-md game-card"
+                            className="max-w-md game-card"
                             key={game.slug} 
                             >
                                 <Card.Image className="gameImg" src={game.background_image} alt={game.name} />
@@ -101,7 +170,56 @@ function MyLists() {
                             </Card> 
                     ) } 
                         </ul>
+                        
+                        :
+                        <p>No games in wishlist.</p>
+                    }
                     </div>
+
+                    <div className="p-2 border">
+                        <h3 id="favouritesHeading">Favourites</h3>
+                    {
+                        favourites.length > 0
+                        ?
+                        
+                        <ul className="list-disc searchResults">
+                        { favourites.map( game =>
+                            <Card 
+                            className="max-w-md game-card"
+                            key={game.slug} 
+                            >
+                                <Card.Image className="gameImg" src={game.background_image} alt={game.name} />
+                                
+                                <Card.Body>
+                                    <Card.Title tag="h2">{game.name}
+                                </Card.Title>
+
+                                    <Card.Actions className="justify-end">
+                                        <Button 
+                                            className="btn btn-sm btn-primary"
+                                            onClick={ () => navigate(`/game/${game.slug}`)} 
+                                            >
+                                            View
+                                        </Button>
+                                        <Button 
+                                        className="btn btn-sm btn-accent"
+                                        onClick={ () => {
+                                            removeFromList('favourites',game)
+                                        }}>
+                                            Delete
+                                        </Button>
+                                    </Card.Actions>
+                                </Card.Body>
+                            </Card> 
+                    ) } 
+                        </ul>
+                    
+                    :
+                    <p>No favourites to display.</p>
+                    }
+                    </div>
+
+                    
 
             </div>
 
