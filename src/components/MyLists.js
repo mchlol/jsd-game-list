@@ -20,6 +20,7 @@ function MyLists() {
         // console.log('My lists useEffect callback running');
         const wishlist = JSON.parse(localStorage.getItem('wishlist'));
         const favourites = JSON.parse(localStorage.getItem('favourites'));
+        const played = JSON.parse(localStorage.getItem('played'));
         // console.log('wishlist:',wishlist);
 
         if (wishlist) {
@@ -30,7 +31,9 @@ function MyLists() {
             setFavourites(favourites);
         }
 
-
+        if (played) {
+            setPlayed(played);
+        }
 
     }, [listChanged]); 
 
@@ -54,7 +57,8 @@ function MyLists() {
 
         // how to refresh the component?
         setListChanged(true); // set this value as the useEffect dependency so the component only re-renders when this value changes 
-        // but this only works once?
+
+        // update the list in state
         setWishlist(getList);
     }
 

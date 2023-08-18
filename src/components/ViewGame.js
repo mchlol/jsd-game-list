@@ -76,18 +76,18 @@ function ViewGame () {
         // if not, create the key with [gameObj]
 
         const list = JSON.parse(localStorage.getItem(listName));
-        console.log('check list first',list);
+        // console.log('check list first',list);
         if (list && Array.isArray(list)) {
             // check if the obj already exists in the list array
             // get the index in the list's array of the specified object
             const gameId = gameObj.id; // the value to search for
             const foundId = list.findIndex( (element) => element.id === gameId);
-            console.log('Found ID:',foundId) // returns the index of the obj with matching id
+            // console.log('Found ID:',foundId) // returns the index of the obj with matching id
             const button = ev.target;
             if (foundId === -1) {
                 console.log('game was not already added')
                 list.push(gameObj);
-                console.log('game pushed, list value changed',list);
+                // console.log('game pushed, list value changed',list);
                 localStorage.setItem(listName,JSON.stringify(list));
                 button.className = 'btn btn-success btn-sm';
                 button.textContent = `added to ${listName}`;
@@ -149,6 +149,7 @@ function ViewGame () {
                 <div className="p-2">
                     <Button 
                     className="btn btn-secondary btn-sm"
+                    style={{margin: '0.5rem'}}
                     onClick={ ev => {
                         handleClick('wishlist',game,ev);
                     }} 
@@ -158,11 +159,22 @@ function ViewGame () {
 
                     <Button 
                     className="btn btn-secondary btn-sm"
+                    style={{margin: '0.5rem'}}
                     onClick={ ev => {
                         handleClick('favourites',game,ev);
                     }} 
                     >
                         Add to favourites
+                    </Button>
+
+                    <Button 
+                    className="btn btn-secondary btn-sm"
+                    style={{margin: '0.5rem'}}
+                    onClick={ ev => {
+                        handleClick('played',game,ev);
+                    }} 
+                    >
+                        Add to played
                     </Button>
                 </div>
 
