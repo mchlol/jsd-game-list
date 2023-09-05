@@ -20,33 +20,23 @@ The app will have five 'pages':
 - A home/search page which defaults to a search form and list of games (showing the 20 most popular by default). When the user types a query into the search input, the list of games is populated by games matching the user's search query.  
 - a detailed view of a single game from this list or from one of the user's lists - if the user has added notes to a game there should be a way to view these notes from the single game view. 
 - a 'my game lists' page, which shows all lists the user has created.  
-- a detailed view of a users list, showing the games and any notes the user has added, maybe in a table?  
+- STILL TO COME: a detailed view of a users list, showing the games and any notes the user has added, maybe in a table?  
 
 ### Wireframes
 
-![wireframe](./screenshots/searchresults_wireframe.png)  
+Search results:  
+<img src="./screenshots/searchresults_wireframe.png" width="300">
 
-![wireframe](./screenshots/viewgame_wireframe.png)
+View game:  
+<img src="./screenshots/viewgame_wireframe.png" width="300">
 
+![icon](./src/github-mark-white.png)
 
 #### TODO:
 
-<!-- - Back buttons -->
-<!-- - Pagination for search results (and lists?) -->
-<!-- - add header to search results to show what the user searched for -->
 - add routes for pagination
-<!-- - add a welcome message to the home/search page -->
-<!-- - delete from list and update on page -->
 - set up custom list functionality
-<!-- - if game is already in list don't add it -->
-<!-- - display confirmation on game save -->
-<!-- - google font for site header -->
-<!-- - navbar alignment -->
-<!-- - search form alignment -->
 - add github repo link to footer
-- stick footer to bottom of page (why is this so hard?)
-<!-- - add recommendations to ViewGame -->
-<!-- - format ViewGame display -->
 - show the number of screenshots
 - add a favicon to replace default react icon
 - move the footer into a component
@@ -69,7 +59,7 @@ User data (the custom lists) are saved and retrieved from  `localStorage`.
 
 ## Resources
 
-- figma.com
+- http://www.figma.com
 - https://api.rawg.io/docs
 - https://rawgthedocs.orels.sh/api
 - https://corsproxy.io/
@@ -89,8 +79,12 @@ User data (the custom lists) are saved and retrieved from  `localStorage`.
 
 ### Pagination
 
-I went around in circles with this for a while. I even tried making a separate component then realised I couldn't get the search query. Eventually I moved the entire axios request into useEffect and installed `react-paginate` to handle the rest. But another problem - I had an if/else to call the API with /games instead of /games/search if the user didn't enter a query. But the render was triggering before the request was finished (even though loading was set to true). I fixed this by using a ternary within the axios call to decide which url to use. I figured this works within jsx, because if/else does not as it needs to return something, so it would work in this case too, and makes it clear what it is doing.  
+I went around in circles with this for a while. I even tried making a separate component then realised I couldn't get the search query. Eventually I moved the entire axios request into useEffect and installed `react-paginate` to handle the rest. But another problem - I had an if/else to call the API with /games instead of /games/search if the user didn't enter a query. But the render was triggering before the request was finished (even though loading was set to true). I remembered something our class instructor said about expressions in jsx needing to return something, and applied that same principle to the actual call to the URL! I used a ternary within the axios call to decide which url to use. 
 
 ### useEffect infinite loop
 
 In the MyLists component, I call the wishlist key from localStorage. Setting this list as the dependency triggers an infinite loop as the key gets called and set within useEffect. I read [this post by Dan Abromov](https://overreacted.io/a-complete-guide-to-useeffect/) and created a boolean `listChanged` and use that as the dependency instead - so when a user deletes a game from the list, `listChanged` is updated to true. This works once. But when the user deletes another game straightaway the view does not update. This is fixed by also updating the `wishlist` variable in state. Then it triggers a re-render.  
+
+## Conclusion
+
+I learned a lot from creating this project, I really enjoyed using React. It's only my first React project, so it's very basic, but I'm excited to explore this further. 
