@@ -30,7 +30,6 @@ Search results:
 View game:  
 <img src="./screenshots/viewgame_wireframe.png" width="300">
 
-![icon](./src/github-mark-white.png)
 
 #### TODO:
 
@@ -46,6 +45,7 @@ View game:
 ## Deployment
 
 The app will be hosted on Netlify [here](https://jsd-game-list.netlify.app/)  
+The purpose for this instead of using gh-pages was to hide my API key for the RAWG.io API, using Netlify functions.  
  
 
 ## Build and routing
@@ -55,6 +55,7 @@ The app is built with React, using React Router to create links. I am also using
 ## User Data
 
 User data (the custom lists) are saved and retrieved from  `localStorage`.  
+On the one hand, the user is tied to the device and browser they create their lists in. On the other hand, there is no need to create an account and log in to yet another app in the world. 
 
 
 ## Resources
