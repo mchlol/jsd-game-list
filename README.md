@@ -39,6 +39,7 @@ View game:
 - show the number of screenshots
 - add a favicon to replace default react icon
 - move the footer into a component
+- lists section should side scroll - try this: set items not to shrink or grow, or wrap, and set overflow to scroll. 
 
 <!-- - add wireframes and screenshots to readme -->
 
