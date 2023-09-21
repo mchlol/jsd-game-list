@@ -121,46 +121,30 @@ a:hover {
   max-width: 600px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-/* .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
-
-/* .App-link {
-  color: #61dafb;
-} */
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .footer--logo {
   width: 20px;
 }
 
-.list--container {
-  border: 1px solid red;
-  display: flex;
+/* list styles */
+
+.mylists--container {
+  border: 1px solid #fff;
+  margin: 0 0 1em 0;
+  width: 100%;
+  overflow-x: auto;
 }
 
-.list--container div {
-  border: 1px solid blue;
+.list--container {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.list--game {
+  width: 300px;
+  border: 1px solid #000;
+  margin: 1em 0.5em;
+  flex: 0 0 auto;
+  display: flex;
 }

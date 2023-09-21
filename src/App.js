@@ -5,7 +5,7 @@ import SearchForm from './components/SearchForm';
 import ViewGame from './components/ViewGame';
 import MyLists from './components/MyLists';
 import NavBar from './components/NavBar';
-import { Footer } from 'react-daisyui';
+import AppFooter from './components/AppFooter';
 
 function App() {
 
@@ -36,13 +36,7 @@ function App() {
       </Router>
     </div>
 
-    <Footer id="appFooter" className="p-4 bg-primary text-secondary-content place-content-center">
-
-        <div className="flex justify-center">
-        All data provided by <a href="https://rawg.io/" rel="noreferrer" target="_blank">RAWG.io</a>
-        </div>
-          
-      </Footer>
+    <AppFooter />
 
     </>
     

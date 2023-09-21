@@ -97,16 +97,16 @@ function MyLists() {
             <div id="listOfLists" className="p-2 grid grid-cols-3">
                 {/* TODO: these should be components */}
 
-                <div className="p-2 border">
+                <div className="p-2 mylists--container">
                     <h3 id="wishlistHeading">Wishlist</h3>
                     {
                         wishlist.length > 0
                         ?
                         
-                        <ul className="list-disc searchResults">
+                        <ul className="list--container">
                         { wishlist.map( game =>
                             <Card 
-                            className="max-w-md game-card"
+                            className="list--game"
                             key={game.slug} 
                             >
                                 <Card.Image className="gameImg" src={game.background_image} alt={game.name} />
@@ -139,16 +139,16 @@ function MyLists() {
                     }
                 </div>
 
-                <div className="p-2 border">
+                <div className="p-2 mylists--container">
                     <h3 id="favouritesHeading">Favourites</h3>
                     {
                         favourites.length > 0
                         ?
                         
-                        <ul className="list-disc searchResults">
+                        <ul className="list-disc list--container">
                         { favourites.map( game =>
                             <Card 
-                            className="max-w-md game-card"
+                            className="max-w-md list--game"
                             key={game.slug} 
                             >
                                 <Card.Image className="gameImg" src={game.background_image} alt={game.name} />
