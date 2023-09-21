@@ -151,3 +151,16 @@ a:hover {
     transform: rotate(360deg);
   }
 }
+
+.footer--logo {
+  width: 20px;
+}
+
+.list--container {
+  border: 1px solid red;
+  display: flex;
+}
+
+.list--container div {
+  border: 1px solid blue;
+}
