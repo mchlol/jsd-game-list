@@ -35,13 +35,12 @@ View game:
 
 - add routes for pagination
 - set up custom list functionality
-- add github repo link to footer
 - show the number of screenshots
 - add a favicon to replace default react icon
 - move the footer into a component
-- lists section should side scroll - try this: set items not to shrink or grow, or wrap, and set overflow to scroll. 
+- add list sorting functionality (eg sort by platform)
+- move list state into parent component so it can be accessed by ViewGame and MyLists components
 
-<!-- - add wireframes and screenshots to readme -->
 
 ## Deployment
 
