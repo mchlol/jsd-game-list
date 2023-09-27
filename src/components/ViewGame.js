@@ -29,7 +29,7 @@ function ViewGame () {
         // same call as for SearchResults but for a specific game it returns a CORS error... sometimes
 
         const url = 'https://corsproxy.io/?' + encodeURIComponent(callApi);
-        // CORS ok but now it returns a bad request error
+        // now it returns a bad request error
 
         // this works just fine...but exposes the API key 😤
         axios.get(`https://corsproxy.io/?https%3A%2F%2Frawg.io%2Fapi%2Fgames%2F${slug}%3Fkey%3Da2fbc003e2d445e19986345bc468db3c`)
@@ -53,13 +53,12 @@ function ViewGame () {
 
     function getRecommendations(slug) {
         setLoading(true);
+        // no CORS error and no exposing API key
         axios.get(`https://rawg.io/api/games?search=${slug}&page=1&page_size=3&token&key=${process.env.REACT_APP_API_KEY}`)
 
         .then(res=> {
-            // console.log('Recommendations:',res.data.results);
             setGameRecs(res.data.results);
             setLoading(false);
-            // console.log(gameRecs);
         })
         .catch(err => {
             console.log('Error',err);
@@ -68,41 +67,69 @@ function ViewGame () {
 
     function handleClick(listName,gameObj,ev) {
         console.log('Adding game to ' + listName,gameObj);
-        // TODO: split into 2 functions for list handling and button handling
+
+        // TODO: toggle game add to/remove from list, and corresponding button style
+        // when the button (ev) is clicked;
+        // check the specified list for gameObj
+        // if it is present, remove it, and call button style func with false
+        // if it is not present add it, and call button style func with true
+
+        // TODO: split into 2 functions for local storage handling and button style handling
         // 1. local storage
         // get the key 'listName' from local storage & parse it
         // check if it has a value & that value is an array
         // if so, push gameObj to it
         // if not, create the key with [gameObj]
 
-        const list = JSON.parse(localStorage.getItem(listName));
+        const storedList = JSON.parse(localStorage.getItem(listName));
         // console.log('check list first',list);
+        const button = ev.target;
+        console.log(button);
+            if (!gameInList(listName,gameObj)) {
+                console.log('game was not already added')
+                storedList.push(gameObj);
+                localStorage.setItem(listName,JSON.stringify(storedList));
+                buttonStyle(true,button,listName);
+            } else {
+                console.log('game is already added to this list');
+                buttonStyle(false,button,listName);
+            }
+
+    } // handleClick
+
+    function gameInList(listName,gameObj) {
+        // this function should correspond to state 'gameIsInList'
+        console.log(`Checking ${listName} for ${gameObj.name}`);
+
+        // get the key 'listName' from local storage & parse it
+        const list = JSON.parse(localStorage.getItem(listName));
+
+        // check if it has a value & that value is an array
         if (list && Array.isArray(list)) {
             // check if the obj already exists in the list array
             // get the index in the list's array of the specified object
             const gameId = gameObj.id; // the value to search for
             const foundId = list.findIndex( (element) => element.id === gameId);
-            // console.log('Found ID:',foundId) // returns the index of the obj with matching id
-            const button = ev.target;
+
             if (foundId === -1) {
-                console.log('game was not already added')
-                list.push(gameObj);
-                // console.log('game pushed, list value changed',list);
-                localStorage.setItem(listName,JSON.stringify(list));
-                button.className = 'btn btn-success btn-sm';
-                button.textContent = `added to ${listName}`;
+                console.log('game is not in list');
+                return false;
             
             } else {
-                console.log('game is already added to this list');
-                button.className = 'btn btn-success btn-sm';
-                button.textContent = `already in ${listName}`;
+                console.log('game is in list')
+                return true;
             }
-        } else {
-            localStorage.setItem(listName,JSON.stringify([gameObj]));
-        }
+        } 
+    } // gameInList
 
-
-    } // handleClick
+    function buttonStyle(inList,button,listName) {
+            if (inList) {
+                button.className = 'btn btn-success btn-sm';
+            } else {
+                button.className = 'btn btn-secondary btn-sm';
+            }
+            button.textContent = `in ${listName}`;
+    }
 
 
 
@@ -133,7 +160,7 @@ function ViewGame () {
                 <Card.Title className="p-2 gameHeader text-2xl">{game.name}</Card.Title>
 
                 <div className="p-2 gameHeaderImg">
-                    { <img src={game.background_image} alt="{game.name}" /> }
+                    { <img src={game.background_image} alt={game.name} /> }
                 </div>
 
                 
@@ -147,6 +174,11 @@ function ViewGame () {
                 </div>
 
                 <div className="p-2">
+                {/* if game is in list, determine button text and style 
+                1. check localStorage if gameObj is in listName
+                2. if true, button class 'btn-success' & text 'in listName'
+                3. if false, button class 'btn-secondary' & text 'add to listName'
+                4. toggle add/remove from list on button click - & mirror to localStorage */}
                     <Button 
                     className="btn btn-secondary btn-sm"
                     style={{margin: '0.5rem'}}
@@ -164,6 +196,7 @@ function ViewGame () {
                         handleClick('favourites',game,ev);
                     }} 
                     >
+                    
                         Add to favourites
                     </Button>
 

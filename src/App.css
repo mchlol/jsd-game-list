@@ -109,7 +109,7 @@ a:hover {
 }
 
 .gameInfo {
-  margin-top: 1em;
+  margin: 1em;
 }
 
 .game-card img {
@@ -143,8 +143,9 @@ a:hover {
 
 .list--game {
   width: 300px;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   margin: 1em 0.5em;
   flex: 0 0 auto;
   display: flex;
+  box-shadow: 3px 3px 10px #c267d0;
 }

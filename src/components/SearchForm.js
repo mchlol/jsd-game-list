@@ -28,6 +28,7 @@ function SearchForm() {
                 <br />
                 <p>Browse an extensive list of games and save for later reference.</p>
                 <br />
+                <p>Recommended searches: Control, Hypnospace Outlaw, Stray</p>
 
             </div>
             
