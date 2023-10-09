@@ -9,6 +9,10 @@ import AppFooter from './components/AppFooter';
 
 function App() {
 
+  function handleList(listName,gameObj) {
+    console.log(listName,gameObj);
+  }
+
   return (
     <>
     <div className="App-header">
@@ -26,7 +30,7 @@ function App() {
 
           <Route path="/search/:query/page/:1" element={<SearchResults />} />
 
-          <Route path="/game/:slug" element={<ViewGame />} />
+          <Route path="/game/:slug" element={<ViewGame handleList={handleList}/>} />
 
           <Route path="/my-lists" element={<MyLists />} />
         </Routes>

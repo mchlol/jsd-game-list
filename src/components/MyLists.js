@@ -145,10 +145,10 @@ function MyLists() {
                         favourites.length > 0
                         ?
                         
-                        <ul className="list-disc list--container">
+                        <ul className="list--container">
                         { favourites.map( game =>
                             <Card 
-                            className="max-w-md list--game"
+                            className="list--game"
                             key={game.slug} 
                             >
                                 <Card.Image className="gameImg" src={game.background_image} alt={game.name} />
@@ -181,15 +181,15 @@ function MyLists() {
                     }
                 </div>
                 
-                <div className="p-2 border">
+                <div className="p-2 mylists--container">
                     <h3 id="playedHeading">Played</h3>
                     {
                         played.length > 0
                         ?
-                        <ul className="list-disc searchResults">
+                        <ul className="list--container">
                         { played.map( game =>
                             <Card 
-                            className="max-w-md game-card"
+                            className="list--game"
                             key={game.slug} 
                             >
                                 <Card.Image className="gameImg" src={game.background_image} alt={game.name} />
